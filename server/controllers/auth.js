@@ -52,7 +52,6 @@ module.exports = {
       .catch(err => console.log(err))
   },
 
-
   allUsers: (req, res) => {
     User.find()
       .then(result => res.json(result))
