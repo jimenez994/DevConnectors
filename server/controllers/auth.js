@@ -24,10 +24,10 @@ module.exports = {
                 res.json({success: true, token : "Bearer " + token})
               })
             })
-            .catch(err => res.status(405).json(err))
+            .catch(errors => res.status(401).json(errors))
         }
       })
-      .catch(err => res.status(405).json(err))
+      .catch(errors => res.status(200).json(errors))
   },
   login: (req, res) => {
     User.findOne({email: req.body.email})

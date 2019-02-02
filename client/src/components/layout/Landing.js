@@ -61,7 +61,7 @@ class Landing extends Component {
         <div  className={classes.darkOverlay}>
           <div className={classes.middle}>
           <Typography variant="h1" align='center'  className={classes.text}>
-            Dev Connectors {this.state.isShowing}
+            Dev Connectors
           </Typography>
           <Typography variant="h5" align='center' className={classes.text} paragraph>
             Create a developer profile/portfolio, share posts and get help from other developers
