@@ -1,0 +1,1 @@
+export const AUTH_MODAL = "AUTH_MODAL"
