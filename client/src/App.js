@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 // components
 import Landing from './components/layout/Landing';
 import Footer from './components/layout/Footer';
-import Navbar from './components/layout/Navbar'
+import Navbar from './components/layout/Navbar';
+import Register from "./components/auth/registration";
+import Login from "./components/auth/login";
 
 // redux
 import { Provider } from "react-redux";
@@ -18,6 +20,8 @@ class App extends Component {
           <div className="App">
             <Navbar/>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login}/>
             <Footer/>
           </div>
         </Router>

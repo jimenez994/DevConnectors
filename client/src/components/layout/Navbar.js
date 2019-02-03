@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import Registration from '../modal/registration';
 
 const styles = {
   root: {
@@ -27,27 +26,10 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShowing: false
     }
-  }
-  openModalHandler = () => {
-    this.setState({
-        isShowing: true
-    });
-  }
-  closeModalHandler = () => {
-    this.setState({
-        isShowing: false
-    });
   }
   render () {
     const {classes} = this.props;
-    let modalContent;
-    if(this.state.isShowing){
-      modalContent  = (
-        <Registration  show={this.state.isShowing} close={this.closeModalHandler}/>
-      )
-    }
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.backStyle}>
@@ -55,8 +37,7 @@ class Navbar extends Component {
               <Button className={classes.darkerText} ><span>Dev</span>Connectors</Button>
               <Button color="inherit">Developers</Button>
               <div className={classes.grow}/>
-              {modalContent}
-              <Button color="inherit" onClick={this.openModalHandler} >Sign Up</Button>
+              <Button color="inherit" >Sign Up</Button>
               <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>

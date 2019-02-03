@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Paper,  Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import Registration from '../modal/registration';
 
 const styles = {
   paperI: {
@@ -29,33 +28,9 @@ const styles = {
 
 }
 class Landing extends Component {
-  constructor(props) {
-    super(props);
-    this.state ={
-      isShowing: false
-    }
-  }
-  openModalHandler = () => {
-    this.setState({
-        isShowing: true
-    });
-  }
-  closeModalHandler = () => {
-    this.setState({
-        isShowing: false
-    });
-  }
 
   render () {
     const {classes} = this.props
-
-    let modalContent;
-    if(this.state.isShowing){
-      modalContent  = (
-        <Registration  show={this.state.isShowing} close={this.closeModalHandler}/>
-      )
-    }
-    
     return (
       <Paper className={classes.paperI} >
         <div  className={classes.darkOverlay}>
@@ -66,8 +41,6 @@ class Landing extends Component {
           <Typography variant="h5" align='center' className={classes.text} paragraph>
             Create a developer profile/portfolio, share posts and get help from other developers
           </Typography>
-          <button onClick={this.openModalHandler}>Open Modal</button>
-              {modalContent}
           </div>
         </div>
       </Paper>

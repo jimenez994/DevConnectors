@@ -62,7 +62,6 @@ class Registration extends Component {
             </FormControl>
             <Button type="submit">Register</Button>
           </form>
-          <button  onClick={this.props.close}>CLOSE</button>
         </CardContent>
       </Card>
       </div>
@@ -70,12 +69,12 @@ class Registration extends Component {
   }
 }
 Registration.propTypes = {
-  user: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   registerUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  auth: state.auth
 })
 
 export default connect(mapStateToProps, {registerUser})(withStyles(styles)(Registration))
