@@ -19,6 +19,16 @@ class Registration extends Component {
       },
     }
   }
+  componentDidMount(){
+    if(this.props.auth.isAuthenticated){
+      this.props.history.push('/dashboard');      
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
   onChange = (e) => {
     e.persist();
     // this.setState({User : {[e.target.name]: e.target.value}})
@@ -29,6 +39,7 @@ class Registration extends Component {
       }
     }))
   }
+  
   onSubmit = (e) => {
     e.preventDefault();
     this.props.registerUser(this.state.User)
