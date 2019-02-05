@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const EducationSchema = new mongoose.Schema({
   school: {
     type: String,
-    required: [true, "School is required"]
+    required: true
   },
   degree: {
     type: String,
-    required: [true, "Degree is required"]
+    required: true
   },
   fieldofstudy: {
     type: String,
-    required: [true, "Field of study is required"]
+    required: true
   },
   from: {
     type: Date,
-    required: [true, "Start date is required"]
+    required: true
   },
   to: {
     type: Date

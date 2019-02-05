@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import {setCurrentUser} from './actions/authActions'
+import setAuthToken from "./utils/setAuthToken";
 
 // components
 import Landing from './components/layout/Landing';
@@ -7,10 +10,32 @@ import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
 import Register from "./components/auth/registration";
 import Login from "./components/auth/login";
+import PrivateRoute from './components/common/PrivateRoute';
+import Dashboard from './components/dashboard/Dashboard';
 
 // redux
 import { Provider } from "react-redux";
 import store from "./store";
+
+// Check for token
+// localStorage.removeItem('jwtToken');
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  setAuthToken(localStorage.jwtToken);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(localStorage.jwtToken));
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000;
+  // if (decoded.exp < currentTime) {
+  //   // Logout user
+  //   store.dispatch(logoutUser());
+  //   // Clear current Profile
+  //   store.dispatch(clearCurrentProfile());
+  //   // Redirect to login
+  //   window.location.href = '/login';
+  // }
+}
 
 class App extends Component {
   render() {
@@ -22,6 +47,9 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login}/>
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+            </Switch>
             <Footer/>
           </div>
         </Router>

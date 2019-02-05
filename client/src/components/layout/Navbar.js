@@ -1,8 +1,10 @@
 import React, { Component } from 'react';import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { Link as RouterLink } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import { Link } from '@material-ui/core';
 
 const styles = {
   root: {
@@ -34,11 +36,11 @@ class Navbar extends Component {
       <div className={classes.root}>
         <AppBar position="static" className={classes.backStyle}>
           <Toolbar>
-              <Button className={classes.darkerText} ><span>Dev</span>Connectors</Button>
+          <Link color="inherit" underline="none" component={RouterLink} to="/">DevConnectors</Link>
               <Button color="inherit">Developers</Button>
               <div className={classes.grow}/>
-              <Button color="inherit" >Sign Up</Button>
-              <Button color="inherit">Login</Button>
+              <Link color="inherit" underline="none" component={RouterLink} to="/register">Register  </Link> 
+              <Link color="inherit" underline="none" component={RouterLink} to="/login"> Login</Link>
           </Toolbar>
         </AppBar>
       </div>

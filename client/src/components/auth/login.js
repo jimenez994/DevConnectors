@@ -13,8 +13,26 @@ class Login extends Component {
       userLoginInfo: {
         email: '',
         password: ''
-      }
+      },
+      errors: {}
     }
+  }
+  componentDidMount(){
+    if(this.props.auth.isAuthenticated){
+      this.props.history.push('/dashboard');      
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+    console.log(this.state.errors);
+    
   }
   onChange = (e) => {
     e.persist();
@@ -38,7 +56,7 @@ class Login extends Component {
       <Card  >
         <CardContent>
           <form onSubmit={this.onSubmit} >
-            <FormControl fullWidth>
+            <FormControl fullWidth error={true}>
               <InputLabel>Email</InputLabel>
               <Input onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
             </FormControl>
