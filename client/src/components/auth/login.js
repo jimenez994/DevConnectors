@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Card,Input, CardContent, FormControl, InputLabel, Button } from '@material-ui/core';
+import { Card,Input, CardContent, FormControl, InputLabel, Button, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './../../assets/modal';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
+import isEmpty from '../../validation/is-empty';
 
 class Login extends Component {
   constructor(props) {
@@ -50,17 +51,11 @@ class Login extends Component {
     const {classes} = this.props
     return (
       <div className={classes.modalOverlay}>
-      <Card  >
+      <Card>
         <CardContent>
           <form onSubmit={this.onSubmit} >
-            <FormControl fullWidth error={true}>
-              <InputLabel>Email</InputLabel>
-              <Input onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
-            </FormControl>
-            <FormControl>
-              <InputLabel>Password</InputLabel>
-              <Input onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
-            </FormControl>
+              <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
+              <TextField error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password} label="Password" onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
             <Button type="submit">Login</Button>
           </form>
         </CardContent>
@@ -71,10 +66,12 @@ class Login extends Component {
 }
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   loginUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 })
 export default connect(mapStateToProps, {loginUser})(withStyles(styles)(Login))

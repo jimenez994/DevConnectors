@@ -36,13 +36,17 @@ class Navbar extends Component {
     this.state = {
     }
   }
+  onLogoutClick = () => {
+    this.props.logoutUser();
+  }
+  
   render () {
     const {classes} = this.props;
     const {isAuthenticated, user} = this.props.auth
     let content;
-    
+
     if(isAuthenticated){
-      content = (<p>out</p>)
+      content = (<Button color="inherit" onClick={this.onLogoutClick}>Logout</Button>)
     }else{
       content = (
         <div>

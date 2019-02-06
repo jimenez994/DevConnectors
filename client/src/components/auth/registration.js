@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
-import { Card, CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import { Card, CardContent,TextField, FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './../../assets/modal';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
+import isEmpty from '../../validation/is-empty';
 
 class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      User:{
+      userRegisterInfo:{
         firstName: "",
         lastName: "",
         email: "",
         password: "",
-        comfirmPassword: ""
+        confirmPassword: ""
       },
+      errors:{}
     }
   }
   componentDidMount(){
@@ -28,21 +30,24 @@ class Registration extends Component {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
+    if (nextProps.errors) {
+      this.setState({errors: nextProps.errors})
+    }
   }
   onChange = (e) => {
     e.persist();
     // this.setState({User : {[e.target.name]: e.target.value}})
     this.setState(prevState => ({
       ...prevState,
-      User:{
-        ...prevState.User, [e.target.name]: e.target.value
+      userRegisterInfo:{
+        ...prevState.userRegisterInfo, [e.target.name]: e.target.value
       }
     }))
   }
   
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.registerUser(this.state.User)
+    this.props.registerUser(this.state.userRegisterInfo)
   }
   render () {
     const {classes} = this.props;
@@ -51,26 +56,11 @@ class Registration extends Component {
       <Card  >
         <CardContent>
           <form onSubmit={this.onSubmit} >
-            <FormControl>
-              <InputLabel>First Name</InputLabel>
-              <Input onChange={this.onChange} value={this.state.User.firstName} name="firstName"/>
-            </FormControl>
-            <FormControl>
-              <InputLabel>Last Name</InputLabel>
-              <Input onChange={this.onChange} value={this.state.User.lastName} name="lastName"/>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel>Email</InputLabel>
-              <Input onChange={this.onChange} value={this.state.User.email} name="email"/>
-            </FormControl>
-            <FormControl>
-              <InputLabel>Password</InputLabel>
-              <Input onChange={this.onChange} type="password" value={this.state.User.password} name="password"/>
-            </FormControl>
-            <FormControl>
-              <InputLabel>Confirm password</InputLabel>
-              <Input onChange={this.onChange} type="password" value={this.state.User.comfirmPassword} name="comfirmPassword"/>
-            </FormControl>
+            <TextField error={!isEmpty(this.state.errors.firstName)} helperText={this.state.errors.firstName} label="First name" onChange={this.onChange} value={this.state.userRegisterInfo.firstName} name="firstName"/>
+            <TextField error={!isEmpty(this.state.errors.lastName)} helperText={this.state.errors.lastName}  label="Last name" onChange={this.onChange} value={this.state.userRegisterInfo.lastName} name="lastName"/>
+            <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userRegisterInfo.email} name="email"/>
+            <TextField type="password" error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password}  label="Password" onChange={this.onChange} value={this.state.userRegisterInfo.password} name="password"/>
+            <TextField type="password" error={!isEmpty(this.state.errors.confirmPassword)} helperText={this.state.errors.confirmPassword}  label="Confirm password" onChange={this.onChange} value={this.state.userRegisterInfo.confirmPassword} name="confirmPassword"/>
             <Button type="submit">Register</Button>
           </form>
         </CardContent>
@@ -81,11 +71,13 @@ class Registration extends Component {
 }
 Registration.propTypes = {
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   registerUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 })
 
 export default connect(mapStateToProps, {registerUser})(withStyles(styles)(Registration))

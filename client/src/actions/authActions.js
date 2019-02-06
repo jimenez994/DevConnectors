@@ -12,7 +12,12 @@ export const registerUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(token));
     })
-    .catch(err => console.log(err.response.data))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    })
 }
 
 // login user
@@ -23,7 +28,12 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(token));
     })
-    .catch(err => console.log(err.response.data))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    })
 }
 
 export const logoutUser = () => dispatch => {
