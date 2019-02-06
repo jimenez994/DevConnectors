@@ -1,10 +1,13 @@
-import React, { Component } from 'react';import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { Link } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { logoutUser } from "../../actions/authActions";
 
 const styles = {
   root: {
@@ -21,6 +24,9 @@ const styles = {
   darkerText:{
     color: 'white',
     fontWeight: '900'
+  },
+  space: {
+    marginRight: '10px'
   }
 };
 
@@ -32,6 +38,19 @@ class Navbar extends Component {
   }
   render () {
     const {classes} = this.props;
+    const {isAuthenticated, user} = this.props.auth
+    let content;
+    
+    if(isAuthenticated){
+      content = (<p>out</p>)
+    }else{
+      content = (
+        <div>
+          <Link className={classes.space} color="inherit" underline="none" component={RouterLink} to="/register">Register  </Link> 
+          <Link color="inherit" underline="none" component={RouterLink} to="/login"> Login</Link>
+        </div>
+      )
+    }
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.backStyle}>
@@ -39,16 +58,22 @@ class Navbar extends Component {
           <Link color="inherit" underline="none" component={RouterLink} to="/">DevConnectors</Link>
               <Button color="inherit">Developers</Button>
               <div className={classes.grow}/>
-              <Link color="inherit" underline="none" component={RouterLink} to="/register">Register  </Link> 
-              <Link color="inherit" underline="none" component={RouterLink} to="/login"> Login</Link>
+              {content}
           </Toolbar>
         </AppBar>
       </div>
     )
   }
 }
+
 Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+  auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired
+}
 
-export default withStyles(styles)(Navbar);
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {logoutUser})(withStyles(styles)(Navbar));

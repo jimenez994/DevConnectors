@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import {setCurrentUser} from './actions/authActions'
+import {setCurrentUser, logoutUser} from './actions/authActions'
 import setAuthToken from "./utils/setAuthToken";
+import jwtDecode from 'jwt-decode';
 
 // components
 import Landing from './components/layout/Landing';
@@ -22,19 +22,20 @@ import store from "./store";
 if (localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
-  // Set user and isAuthenticated
+  // Set user and isAuthenticated 
   store.dispatch(setCurrentUser(localStorage.jwtToken));
-
+  // jwt decoded user info
+  const decoded = jwtDecode(localStorage.jwtToken);
   // Check for expired token
   const currentTime = Date.now() / 1000;
-  // if (decoded.exp < currentTime) {
-  //   // Logout user
-  //   store.dispatch(logoutUser());
-  //   // Clear current Profile
-  //   store.dispatch(clearCurrentProfile());
-  //   // Redirect to login
-  //   window.location.href = '/login';
-  // }
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Clear current Profile
+    // store.dispatch(clearCurrentProfile());
+    // Redirect to login
+    window.location.href = '/login';
+  }
 }
 
 class App extends Component {
