@@ -4,14 +4,14 @@ import {setCurrentUser, logoutUser} from './actions/authActions'
 import setAuthToken from "./utils/setAuthToken";
 import jwtDecode from 'jwt-decode';
 
-// components
-import Landing from './components/layout/Landing';
-import Footer from './components/layout/Footer';
-import Navbar from './components/layout/Navbar';
-import Register from "./components/auth/registration";
-import Login from "./components/auth/login";
-import PrivateRoute from './components/common/PrivateRoute';
-import Dashboard from './components/dashboard/Dashboard';
+// views
+import Landing from './views/layout/Landing';
+import Footer from './views/layout/Footer';
+import Navbar from './views/layout/Navbar';
+import Register from "./views/auth/registration";
+import Login from "./views/auth/login";
+import PrivateRoute from './views/common/PrivateRoute';
+import Dashboard from './views/dashboard/Dashboard';
 
 // redux
 import { Provider } from "react-redux";
