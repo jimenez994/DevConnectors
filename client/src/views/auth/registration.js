@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Card, CardContent,TextField, FormControl, InputLabel, Input, Button, Paper, Grid } from '@material-ui/core';
+import { Card,TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import styles from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle";
-import GridConteiner from '../../components/Grid/GridContainer';
-import GridItem from '../../components/Grid/GridItem';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
-import isEmpty from '../../validation/is-empty';
+import { registerUser } from 'actions/authActions';
+import isEmpty from 'validation/is-empty';
+import Conteiner from 'components/Grid/Conteiner';
+import styles from 'assets/jss/views/registrationStyle'
 
 class Registration extends Component {
   constructor(props) {
@@ -54,23 +53,18 @@ class Registration extends Component {
   render () {
     const {classes} = this.props;
     return (
-      <div className={classes.container}>
-        <GridConteiner justify="center">
-          <GridItem xs={12} sm={6} md={4}>
-            <Card>
-              <form onSubmit={this.onSubmit} >
-                <TextField error={!isEmpty(this.state.errors.firstName)} helperText={this.state.errors.firstName} label="First name" onChange={this.onChange} value={this.state.userRegisterInfo.firstName} name="firstName"/>
-                <TextField error={!isEmpty(this.state.errors.lastName)} helperText={this.state.errors.lastName}  label="Last name" onChange={this.onChange} value={this.state.userRegisterInfo.lastName} name="lastName"/>
-                <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userRegisterInfo.email} name="email"/>
-                <TextField type="password" error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password}  label="Password" onChange={this.onChange} value={this.state.userRegisterInfo.password} name="password"/>
-                <TextField type="password" error={!isEmpty(this.state.errors.confirmPassword)} helperText={this.state.errors.confirmPassword}  label="Confirm password" onChange={this.onChange} value={this.state.userRegisterInfo.confirmPassword} name="confirmPassword"/>
-                <Button type="submit">Register</Button>
-              </form>
-            </Card>
-          </GridItem>
-        </GridConteiner>
-      </div>
-
+      <Conteiner justify="center">
+        <Card>
+          <form onSubmit={this.onSubmit} >
+            <TextField error={!isEmpty(this.state.errors.firstName)} helperText={this.state.errors.firstName} label="First name" onChange={this.onChange} value={this.state.userRegisterInfo.firstName} name="firstName"/>
+            <TextField error={!isEmpty(this.state.errors.lastName)} helperText={this.state.errors.lastName}  label="Last name" onChange={this.onChange} value={this.state.userRegisterInfo.lastName} name="lastName"/>
+            <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userRegisterInfo.email} name="email"/>
+            <TextField type="password" error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password}  label="Password" onChange={this.onChange} value={this.state.userRegisterInfo.password} name="password"/>
+            <TextField type="password" error={!isEmpty(this.state.errors.confirmPassword)} helperText={this.state.errors.confirmPassword}  label="Confirm password" onChange={this.onChange} value={this.state.userRegisterInfo.confirmPassword} name="confirmPassword"/>
+            <Button type="submit">Register</Button>
+          </form>
+        </Card>
+      </Conteiner>  
     )
   }
 }

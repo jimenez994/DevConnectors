@@ -5,13 +5,13 @@ import setAuthToken from "./utils/setAuthToken";
 import jwtDecode from 'jwt-decode';
 
 // views
-import Landing from './views/layout/Landing';
-import Footer from './views/layout/Footer';
-import Navbar from './views/layout/Navbar';
-import Register from "./views/auth/registration";
-import Login from "./views/auth/login";
-import PrivateRoute from './views/common/PrivateRoute';
-import Dashboard from './views/dashboard/Dashboard';
+import Landing from 'views/layout/Landing';
+import Footer from 'views/layout/Footer';
+import Navbar from 'views/layout/Navbar';
+import Register from "views/auth/registration";
+import Login from "views/auth/login";
+import PrivateRoute from 'views/common/PrivateRoute';
+import Dashboard from 'views/dashboard/Dashboard';
 
 // redux
 import { Provider } from "react-redux";

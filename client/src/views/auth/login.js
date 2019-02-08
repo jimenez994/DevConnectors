@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { Card,Input, CardContent, FormControl, InputLabel, Button, TextField } from '@material-ui/core';
+import { Card, CardContent, Button, TextField, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-// import styles from './../../assets/login';
+import styles from 'assets/jss/views/loginStyles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authActions';
-import isEmpty from '../../validation/is-empty';
-
-const styles = theme => {
-  
-}
+import { loginUser } from 'actions/authActions';
+import isEmpty from 'validation/is-empty';
+import Conteiner from 'components/Grid/Conteiner'
 
 class Login extends Component {
   constructor(props) {
@@ -54,16 +51,21 @@ class Login extends Component {
   render () {
     const {classes} = this.props
     return (
-      <div className={classes.modalOverlay}>
-      <Card>
-        <CardContent>
-          <form onSubmit={this.onSubmit} >
-              <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
-              <TextField error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password} label="Password" onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
-            <Button type="submit">Login</Button>
-          </form>
-        </CardContent>
-      </Card>
+      <div className={classes.container}>
+
+      <Conteiner justify="center">
+        <Grid className={classes.loginBox} xs={12} sm={6} md={4}>
+          <Card login >
+            <CardContent>
+              <form onSubmit={this.onSubmit} >
+                  <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
+                  <TextField error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password} fullWidth label="Password" onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
+                <Button type="submit">Login</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Conteiner>
       </div>
     )
   }
