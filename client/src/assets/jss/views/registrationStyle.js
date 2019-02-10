@@ -12,6 +12,18 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  registrationBox:{
+    // padding: "15px"
+    backgroundColor: "white",
+    borderRadius: "3px",
+    maxWidth: "900px"
+  },
+  registrationForm:{
+    padding: "15px"
+  },
+  registrationInfo:{
+    padding: "15px"
+  }
 
 })
 

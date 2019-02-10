@@ -16,7 +16,7 @@ module.exports = {
     User.findOne({email: req.body.email})
       .then(result => {
         if(result){
-          return res.status(400).json({error: "Email already exists"})
+          return res.status(400).json({email: "Email already exists"})
         }else{
           req.body.password = bcrypt.hashSync(req.body.password, 10);
           req.body.avatar = gravatar.url(req.body.email, {s: 200, r: "pg", d: "mm" })
