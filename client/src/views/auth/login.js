@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardContent, Button, TextField, Grid } from '@material-ui/core';
+import { Card, CardContent, Button, TextField, Grid, CardHeader, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/views/loginStyles';
 import PropTypes from 'prop-types';
@@ -56,12 +56,13 @@ class Login extends Component {
         <Container justify="center" className={classes.darkOverlay}>
           <Grid className={classes.center} item xs={12} sm={6} md={4}>
           <Animated animationIn="bounceInDown" animationOut="fadeOut" isVisible={true}>
-            <Card className={classes.carAnimation}>
+              <CardHeader className={classes.header} classes={{title: classes.title,}} title="Log in"/>
+            <Card className={classes.card}>
               <CardContent >
                 <form onSubmit={this.onSubmit} >
                     <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
                     <TextField error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password} fullWidth label="Password" onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
-                  <Button className={classes.center} fullWidth color="primary" type="submit">Login</Button>
+                  <Button className={classes.logInBtn} fullWidth color="primary" type="submit">Login</Button>
                 </form>
               </CardContent>
             </Card>

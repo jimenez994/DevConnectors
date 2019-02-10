@@ -21,8 +21,11 @@ const container = {
   }
 };
 const styles = theme => ({
-  center:{
-    margin: "auto",
+  logInBtn:{
+    marginTop: "10px",
+    padding: "5px"
+    // fontWeight: "",
+    // fontSize: '20px'
   },
   container: {
     ...container,
@@ -43,7 +46,26 @@ const styles = theme => ({
     backgroundSize: 'cover',
     position: 'relative', 
   },
-
+  header:{
+    background:"#DB2166",
+    margin: '0px 15px -30px 15px',
+    // padding: '25px',
+    textAlign: "center",
+    borderRadius: '4px',
+    fontWeight: "900",
+    // margin: '-25px',
+    position: "relative",
+    // zIndex: "3 !important",
+    title: {
+      color: "white"
+    }
+  },
+  card: {
+    paddingTop: "15px"
+  },
+  title: {
+    color: 'white'
+  }
 
   
 })
