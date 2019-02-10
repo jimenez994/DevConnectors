@@ -13,7 +13,7 @@ const style = {
       display: "table",
       clear: "both",
       content: '" "'
-    }
+    },
   }
 };
 

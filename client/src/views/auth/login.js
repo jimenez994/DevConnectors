@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from 'actions/authActions';
 import isEmpty from 'validation/is-empty';
-import Conteiner from 'components/Grid/Conteiner'
+import Container from 'components/Grid/Container'
+import {Animated} from "react-animated-css";
 
 class Login extends Component {
   constructor(props) {
@@ -51,21 +52,22 @@ class Login extends Component {
   render () {
     const {classes} = this.props
     return (
-      <div className={classes.container}>
-
-      <Conteiner justify="center">
-        <Grid className={classes.loginBox} xs={12} sm={6} md={4}>
-          <Card login >
-            <CardContent>
-              <form onSubmit={this.onSubmit} >
-                  <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
-                  <TextField error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password} fullWidth label="Password" onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
-                <Button type="submit">Login</Button>
-              </form>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Conteiner>
+      <div className={classes.backImg}>
+        <Container justify="center" className={classes.darkOverlay}>
+          <Grid className={classes.center} item xs={12} sm={6} md={4}>
+          <Animated animationIn="bounceInDown" animationOut="fadeOut" isVisible={true}>
+            <Card className={classes.carAnimation}>
+              <CardContent >
+                <form onSubmit={this.onSubmit} >
+                    <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userLoginInfo.email} name="email"/>
+                    <TextField error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password} fullWidth label="Password" onChange={this.onChange} type="password" value={this.state.userLoginInfo.password} name="password"/>
+                  <Button className={classes.center} fullWidth color="primary" type="submit">Login</Button>
+                </form>
+              </CardContent>
+            </Card>
+            </Animated>
+          </Grid>
+        </Container>
       </div>
     )
   }

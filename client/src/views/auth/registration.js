@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerUser } from 'actions/authActions';
 import isEmpty from 'validation/is-empty';
-import Conteiner from 'components/Grid/Conteiner';
+import Container from 'components/Grid/Container';
 import styles from 'assets/jss/views/registrationStyle'
 
 class Registration extends Component {
@@ -53,7 +53,7 @@ class Registration extends Component {
   render () {
     const {classes} = this.props;
     return (
-      <Conteiner justify="center">
+      <Container justify="center">
         <Card>
           <form onSubmit={this.onSubmit} >
             <TextField error={!isEmpty(this.state.errors.firstName)} helperText={this.state.errors.firstName} label="First name" onChange={this.onChange} value={this.state.userRegisterInfo.firstName} name="firstName"/>
@@ -64,7 +64,7 @@ class Registration extends Component {
             <Button type="submit">Register</Button>
           </form>
         </Card>
-      </Conteiner>  
+      </Container>  
     )
   }
 }

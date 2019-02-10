@@ -6,7 +6,7 @@ const styles = {
   paperI: {
     height: '100vh',
     minHeight: '330px',
-    background: `url(${require('./../../assets/img/arms.jpg')})`,
+    background: `url(${require('assets/img/arms.jpg')})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     position: 'relative', 
