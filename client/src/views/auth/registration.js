@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { registerUser } from 'actions/authActions';
 import isEmpty from 'validation/is-empty';
 import Container from 'components/Grid/Container';
-import styles from 'assets/jss/views/registrationStyle'
+import styles from 'assets/jss/views/registrationStyle';
+import {Animated} from 'react-animated-css'
 
 class Registration extends Component {
   constructor(props) {
@@ -53,18 +54,22 @@ class Registration extends Component {
   render () {
     const {classes} = this.props;
     return (
-      <Container justify="center">
-        <Card>
-          <form onSubmit={this.onSubmit} >
-            <TextField error={!isEmpty(this.state.errors.firstName)} helperText={this.state.errors.firstName} label="First name" onChange={this.onChange} value={this.state.userRegisterInfo.firstName} name="firstName"/>
-            <TextField error={!isEmpty(this.state.errors.lastName)} helperText={this.state.errors.lastName}  label="Last name" onChange={this.onChange} value={this.state.userRegisterInfo.lastName} name="lastName"/>
-            <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userRegisterInfo.email} name="email"/>
-            <TextField type="password" error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password}  label="Password" onChange={this.onChange} value={this.state.userRegisterInfo.password} name="password"/>
-            <TextField type="password" error={!isEmpty(this.state.errors.confirmPassword)} helperText={this.state.errors.confirmPassword}  label="Confirm password" onChange={this.onChange} value={this.state.userRegisterInfo.confirmPassword} name="confirmPassword"/>
-            <Button type="submit">Register</Button>
-          </form>
-        </Card>
+      <div className={classes.backImg}>
+      <Container justify="center" className={classes.darkOverlay}>
+        <Animated animationIn="fadeInDown"  isVisible={true}>
+          <Card>
+            <form onSubmit={this.onSubmit} >
+              <TextField error={!isEmpty(this.state.errors.firstName)} helperText={this.state.errors.firstName} label="First name" onChange={this.onChange} value={this.state.userRegisterInfo.firstName} name="firstName"/>
+              <TextField error={!isEmpty(this.state.errors.lastName)} helperText={this.state.errors.lastName}  label="Last name" onChange={this.onChange} value={this.state.userRegisterInfo.lastName} name="lastName"/>
+              <TextField error={!isEmpty(this.state.errors.email)} helperText={this.state.errors.email} fullWidth label="Email" onChange={this.onChange} value={this.state.userRegisterInfo.email} name="email"/>
+              <TextField type="password" error={!isEmpty(this.state.errors.password)} helperText={this.state.errors.password}  label="Password" onChange={this.onChange} value={this.state.userRegisterInfo.password} name="password"/>
+              <TextField type="password" error={!isEmpty(this.state.errors.confirmPassword)} helperText={this.state.errors.confirmPassword}  label="Confirm password" onChange={this.onChange} value={this.state.userRegisterInfo.confirmPassword} name="confirmPassword"/>
+              <Button type="submit">Register</Button>
+            </form>
+          </Card>
+        </Animated>
       </Container>  
+      </div>
     )
   }
 }

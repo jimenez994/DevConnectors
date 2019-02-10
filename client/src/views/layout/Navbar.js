@@ -46,7 +46,12 @@ class Navbar extends Component {
     let content;
 
     if(isAuthenticated){
-      content = (<Button color="inherit" onClick={this.onLogoutClick}>Logout</Button>)
+      content = (
+      <div>
+        <Link color="inherit" underline="none" component={RouterLink} to="/dashboard">{user.firstName}</Link>  
+        <Button color="inherit" onClick={this.onLogoutClick}>Logout</Button>
+      </div>
+      )
     }else{
       content = (
         <div>

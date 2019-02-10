@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardContent, Button, TextField, Grid, CardHeader, Typography } from '@material-ui/core';
+import { Card, CardContent, Button, TextField, Grid, CardHeader } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/views/loginStyles';
 import PropTypes from 'prop-types';
@@ -55,7 +55,7 @@ class Login extends Component {
       <div className={classes.backImg}>
         <Container justify="center" className={classes.darkOverlay}>
           <Grid className={classes.center} item xs={12} sm={6} md={4}>
-          <Animated animationIn="bounceInDown" animationOut="fadeOut" isVisible={true}>
+          <Animated animationIn="fadeInDown" isVisible={true}>
               <CardHeader className={classes.header} classes={{title: classes.title,}} title="Log in"/>
             <Card className={classes.card}>
               <CardContent >
