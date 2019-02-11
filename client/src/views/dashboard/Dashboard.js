@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {getCurrentProfile} from 'actions/profileActions'
-import { Grid, Typography } from '@material-ui/core';
+import {getCurrentProfile, createOrUpdateProfile} from 'actions/profileActions'
+import { Grid, Typography, Button } from '@material-ui/core';
 
 
 class Dashboard extends Component {
@@ -15,6 +15,9 @@ class Dashboard extends Component {
   componentDidMount = () => {
     this.props.getCurrentProfile()
   }
+  onClick = () => {
+    this.props.createOrUpdateProfile({username:'', profecionalStatus:'', skills:''}, this.props.history)
+  }
   render () {
     const {user} = this.props.auth
     let content;
@@ -24,6 +27,7 @@ class Dashboard extends Component {
         <Typography>
           Welcome back, {user.firstName}
         </Typography>
+        <Button onClick={this.onClick}>Create profile</Button>
       </Grid>
     )
   }
@@ -31,10 +35,11 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  createOrUpdateProfile: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile, createOrUpdateProfile})(Dashboard);

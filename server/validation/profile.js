@@ -24,31 +24,31 @@ module.exports = function validateProfileInput(data) {
     errors.skills = "Skills is required"
   }
 
-  if(!Validator.isEmpty(data.social.youtube)){
-    if(!Validator.isURL(data.social.youtube)){
-      errors.social.youtube = "Not a valid URL"
-    }
-  }
-  if(!Validator.isEmpty(data.social.twitter)){
-    if(!Validator.isURL(data.social.twitter)){
-      errors.social.twitter = "Not a valid URL"
-    }
-  }
-  if(!Validator.isEmpty(data.social.facebook)){
-    if(!Validator.isURL(data.social.facebook)){
-      errors.social.facebook = "Not a valid URL"
-    }
-  }
-  if(!Validator.isEmpty(data.social.linkein)){
-    if(!Validator.isURL(data.social.linkein)){
-      errors.social.linkein = "Not a valid URL"
-    }
-  }
-  if(!Validator.isEmpty(data.social.instagram)){
-    if(!Validator.isURL(data.social.instagram)){
-      errors.social.instagram = "Not a valid URL"
-    }
-  }
+  // if(!Validator.isEmpty(data.social.youtube)){
+  //   if(!Validator.isURL(data.social.youtube)){
+  //     errors.social.youtube = "Not a valid URL"
+  //   }
+  // }
+  // if(!Validator.isEmpty(data.social.twitter)){
+  //   if(!Validator.isURL(data.social.twitter)){
+  //     errors.social.twitter = "Not a valid URL"
+  //   }
+  // }
+  // if(!Validator.isEmpty(data.social.facebook)){
+  //   if(!Validator.isURL(data.social.facebook)){
+  //     errors.social.facebook = "Not a valid URL"
+  //   }
+  // }
+  // if(!Validator.isEmpty(data.social.linkein)){
+  //   if(!Validator.isURL(data.social.linkein)){
+  //     errors.social.linkein = "Not a valid URL"
+  //   }
+  // }
+  // if(!Validator.isEmpty(data.social.instagram)){
+  //   if(!Validator.isURL(data.social.instagram)){
+  //     errors.social.instagram = "Not a valid URL"
+  //   }
+  // }
 
   return {
     errors,

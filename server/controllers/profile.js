@@ -21,7 +21,7 @@ module.exports = {
   createOrUpdate: (req, res) => {
     const {errors, isValid} = profileValidator(req.body);
     if(!isValid){
-      res.status(400).json(errors)
+      return res.status(400).json(errors)
     }
     req.body._user = req.user._id
     profile.findOne({_user: req.user._id})
