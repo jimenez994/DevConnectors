@@ -12,7 +12,7 @@ export const registerUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(token));
     })
-    .catch(err => {
+    .catch(err => {      
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data

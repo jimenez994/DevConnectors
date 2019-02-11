@@ -5,13 +5,13 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  Username: {
+  username: {
     type:String, 
-    require: [true, "Username is required"],
-    minlength: [8, "Username must be at least 8 characters"]
+    require: true
   }, 
-  ProfecionalStatus: {
-    type: String
+  profecionalStatus: {
+    type: String,
+    required: true
   },
   company: {
     type: String
@@ -24,13 +24,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   skills: {
     type: [String], 
-    required: [true, "Skills are required"],
-    validate: {
-      validator: function (value) {
-        return value.length > 2
-      },
-      message: "Must at least be three skills"
-    }
+    required: true
   },
   bio: {
     type: String

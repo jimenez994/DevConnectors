@@ -12,6 +12,6 @@ module.exports = (app) => {
   app.get('/api/allUsers', private, auth.allUsers);
 
   // Profile
-  app.get('/api/profile/:id', private, profile.findProfile);
-  app.post('/api/createOrUpdate/profile', private, profile.createOrUpdate);
+  app.get('/api/profile', private, profile.findProfile);
+  app.post('/api/createOrUpdateProfile', private, profile.createOrUpdate);
 } 

@@ -45,7 +45,6 @@ module.exports = function validateRegistrationInput(data) {
   if (Validator.isEmpty(data.confirmPassword)) {
     errors.confirmPassword = 'Confirm Password field is required';
   }
-  console.log(data.confirmPassword, "--> pass" , data.password)
 
   if (!Validator.equals(data.password, data.confirmPassword)) {
     errors.confirmPassword = 'Passwords must match';
