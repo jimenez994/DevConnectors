@@ -32,12 +32,12 @@ module.exports = {
             profile.findOne({username: req.body.username})
               .then(otherProfile => {
                 if(otherProfile){
-                  res.json({username: "Username is already in use"})
+                  return res.json({username: "Username is already in use"})
                 }
               })
           }else{
             profile.findOneAndUpdate({_id: req.body._id},req.body)
-              .then(updatedProfile => res.status(200).json({update:"success"}))
+              .then(updatedProfile =>  res.status(200).json({update:"success"}))
               .catch(err => res.status(404).json(err))
           }
         }else{

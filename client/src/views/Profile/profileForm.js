@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import isEmpty from "validation/is-empty";
 import Container from "components/Grid/Container";
-import { Paper, TextField } from "@material-ui/core";
+import { Paper, TextField, Button } from "@material-ui/core";
+import {createOrUpdateProfile} from 'actions/profileActions'
+
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -15,14 +17,14 @@ class ProfileForm extends Component {
         company: "",
         website: "",
         location: "",
-        skill: [],
+        skills: "",
         bio: "",
         social: {
-          youtube: "",
-          twitter: "",
-          facebook: "",
-          linkedin: "",
-          instagram: ""
+          youtube: "vv",
+          twitter: "gre",
+          facebook: "gr",
+          linkedin: "gre",
+          instagram: "grg"
         }
       }
     };
@@ -46,8 +48,9 @@ class ProfileForm extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   componentWillUnmount() {}
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
+    this.props.createOrUpdateProfile(this.state.profileInputs, this.props.history)
   };
   onChangeMain = (e) => {    
     e.persist()
@@ -90,6 +93,7 @@ class ProfileForm extends Component {
               value={this.state.profileInputs.social.facebook}
               name="facebook"
             />
+            <Button type="submit">Submit</Button>
           </form>
         </Paper>
       </Container>
@@ -98,7 +102,8 @@ class ProfileForm extends Component {
 }
 
 ProfileForm.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  createOrUpdateProfile: PropTypes.func.isRequired
 };
 
 const mapStateProps = state => ({
@@ -107,5 +112,5 @@ const mapStateProps = state => ({
 
 export default connect(
   mapStateProps,
-  {}
+  {createOrUpdateProfile}
 )(ProfileForm);

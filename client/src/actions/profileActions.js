@@ -16,6 +16,8 @@ export const getCurrentProfile = () => dispatch => {
 
 // Create or update profile
 export const createOrUpdateProfile = (profileData, history) => dispatch => {
+  console.log(profileData);
+  
   axios.post('/api/createOrUpdateProfile', profileData)
     .then(res => {
       history.push('/dashboard')
