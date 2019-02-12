@@ -9,7 +9,7 @@ const ProfileSchema = new mongoose.Schema({
     type:String, 
     require: true
   }, 
-  profecionalStatus: {
+  professionalStatus: {
     type: String,
     required: true
   },

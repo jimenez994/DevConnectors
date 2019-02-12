@@ -5,7 +5,7 @@ module.exports = function validateProfileInput(data) {
   let errors = {};
 
   data.username = !isEmpty(data.username) ? data.username : '';
-  data.profecionalStatus = !isEmpty(data.profecionalStatus) ? data.profecionalStatus: '';
+  data.professionalStatus = !isEmpty(data.professionalStatus) ? data.professionalStatus: '';
   errors.skills = !isEmpty(data.skills) ? data.skills: '';
 
   if(!Validator.isLength(data.username, { min: 6, max: 30 })){
@@ -16,8 +16,8 @@ module.exports = function validateProfileInput(data) {
     errors.username = "Username is required"
   }
 
-  if(Validator.isEmpty(data.profecionalStatus)){
-    errors.profecionalStatus = "Status is required"
+  if(Validator.isEmpty(data.professionalStatus)){
+    errors.professionalStatus = "Status is required"
   }
 
   if(Validator.isEmpty(data.skills)){

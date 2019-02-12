@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import { Link as RouterLink } from 'react-router-dom'
 import {getCurrentProfile, createOrUpdateProfile} from 'actions/profileActions'
-import { Grid, Typography, Button } from '@material-ui/core';
+import { Grid, Typography, Button, Link } from '@material-ui/core';
 
 
 class Dashboard extends Component {
@@ -20,14 +21,19 @@ class Dashboard extends Component {
   }
   render () {
     const {user} = this.props.auth
+    const {profile} = this.props.profile
     let content;
-    // if(this.props.)
+    if(profile === null){
+      content = (
+        <Link underline="none" component={RouterLink} to="/profileForm" >Create Profile</Link>
+      )
+    }
     return (
       <Grid container>
         <Typography>
           Welcome back, {user.firstName}
         </Typography>
-        <Button onClick={this.onClick}>Create profile</Button>
+        {content}
       </Grid>
     )
   }
@@ -39,7 +45,8 @@ Dashboard.propTypes = {
   createOrUpdateProfile: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 })
 
 export default connect(mapStateToProps, {getCurrentProfile, createOrUpdateProfile})(Dashboard);
