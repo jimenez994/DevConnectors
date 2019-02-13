@@ -24,33 +24,37 @@ module.exports = {
       return res.status(400).json(errors)
     }
     req.body._user = req.user._id
-    
+    // console.log(req.user._id, req.body);
     profile.findOne({_user: req.user._id})
       .then(result => {
-        let skills = req.body.skills.split(',')
-        req.body.skills = skills;
+        // console.log(result);
+        
+        // let str = req.body.skills
+        // let skills = str.split(",");
+        // req.body.skills = skills
         // if user has a profile updated
         if(result){
-          if(profile.username !== req.body.username){
+          if(result.username !== req.body.username){
             profile.findOne({username: req.body.username})
               .then(otherProfile => {
                 if(otherProfile){
-                  return res.json({username: "Username is already in use"})
+                  return res.status(400).json({username: "Username is already in use"})
                 }
               })
-          }else{
-            profile.findOneAndUpdate({_id: req.body._id},req.body)
-              .then(updatedProfile =>  res.status(200).json({update:"success"}))
-              .catch(err => res.status(404).json(err))
           }
+            // console.log(req.body._id, req.body);
+          profile.findOneAndUpdate({_id: req.body._id},req.body)
+            .then(updatedProfile =>  {return res.status(200).json({update:"success"})})
+            .catch(err => {
+              return res.status(404).json(err) 
+            })
         }else{
         // else create a profile 
           profile.create(req.body)
-            .then(profile => res.json(profile))
-            .catch(err => res.json(err))
+            .then(profile => {return res.json(profile)})
+            .catch(err => {return res.json(err)})
         }
       })
-      .catch(err => res.status(404).json(err))
   },
   
 }

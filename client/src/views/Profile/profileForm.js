@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 import isEmpty from "validation/is-empty";
 import Container from "components/Grid/Container";
 import { Paper, TextField, Grid, Button, Tooltip, FormControl, Select, Input, MenuItem, FormHelperText, InputLabel } from "@material-ui/core";
-import { createOrUpdateProfile } from "actions/profileActions";
+import { createOrUpdateProfile, getCurrentProfile } from "actions/profileActions";
 import styles from "assets/jss/views/profileFormStyles";
 import { withStyles } from "@material-ui/core/styles";
+import Loading from 'views/common/Loading';
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -37,16 +38,19 @@ class ProfileForm extends Component {
 
   componentDidMount = () => {
     const { profile } = this.props.profile;
-    if (!isEmpty(profile)) {
-      console.log(profile);
-      
-      this.state.profile = profile;
+    if (profile !== null) {
+      this.setState({profileInputs: profile})
+    }else{
+      this.props.getCurrentProfile()
     }
   };
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.profile.profile) {
+      this.setState({ profileInputs: nextProps.profile.profile});
+    }
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors});
     }
   }
 
@@ -90,6 +94,12 @@ class ProfileForm extends Component {
 
   render() {
     const { classes } = this.props;
+    const { profile, loading } = this.props.profile;
+    let content;
+    if(profile === null || loading === true){
+      content = (<Loading/>)
+    }else{
+    }
     return (
       <Container justify="center">
         <Grid item md={8} sm={10} xs={12} lg={6}>
@@ -235,7 +245,8 @@ class ProfileForm extends Component {
 
 ProfileForm.propTypes = {
   profile: PropTypes.object.isRequired,
-  createOrUpdateProfile: PropTypes.func.isRequired
+  createOrUpdateProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateProps = state => ({
@@ -245,5 +256,5 @@ const mapStateProps = state => ({
 
 export default connect(
   mapStateProps,
-  { createOrUpdateProfile }
+  { createOrUpdateProfile, getCurrentProfile }
 )(withStyles(styles)(ProfileForm));

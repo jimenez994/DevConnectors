@@ -20,9 +20,9 @@ module.exports = function validateProfileInput(data) {
     errors.professionalStatus = "Status is require"
   }
 
-  if(Validator.isEmpty(data.skills)){
-    errors.skills = "Skills is required"
-  }
+  // if(Validator.isEmpty(data.skills)){
+  //   errors.skills = "Skills is required"
+  // }
 
   if(!isEmpty(data.social.youtube)){
     if(!Validator.isURL(data.social.youtube)){
