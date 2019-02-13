@@ -3,16 +3,10 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import { Link as RouterLink } from 'react-router-dom'
 import {getCurrentProfile, createOrUpdateProfile} from 'actions/profileActions'
-import { Grid, Typography, Button, Link } from '@material-ui/core';
-
+import { Grid, Typography, Link } from '@material-ui/core';
+import Loading from 'views/common/Loading'
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profile: {}
-    }
-  }
   componentDidMount = () => {
     this.props.getCurrentProfile()
   }
@@ -21,12 +15,17 @@ class Dashboard extends Component {
   }
   render () {
     const {user} = this.props.auth
-    const {profile} = this.props.profile
+    const {profile, loading} = this.props.profile
     let content;
-    if(profile === null){
-      content = (
-        <Link underline="none" component={RouterLink} to="/profileForm" >Create Profile</Link>
-      )
+    if(profile === null || loading === true ){
+      content= (<Loading/>)
+    }else{
+        content = (
+          <Link underline="none" component={RouterLink} to="/profileForm" >Create Profile</Link>
+        )
+      // content = (
+      //   <div>some profile info ...</div>
+      // )
     }
     return (
       <Grid container>

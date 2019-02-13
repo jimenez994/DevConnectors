@@ -8,7 +8,7 @@ let opts = {runValidators: true}
 
 module.exports = {
   findProfile: (req, res) => {
-    profile.findOne({_user: req.body._id})
+    profile.findOne({_user: req.user._id})
       .then(profile => {
         if(isEmpty(profile)){
           res.status(400).json({profile:false})
@@ -24,8 +24,11 @@ module.exports = {
       return res.status(400).json(errors)
     }
     req.body._user = req.user._id
+    
     profile.findOne({_user: req.user._id})
       .then(result => {
+        let skills = req.body.skills.split(',')
+        req.body.skills = skills;
         // if user has a profile updated
         if(result){
           if(profile.username !== req.body.username){

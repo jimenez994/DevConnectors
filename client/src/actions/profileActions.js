@@ -1,15 +1,21 @@
 import axios from 'axios';
-import {GET_PROFILE, GET_ERRORS} from "./Types";
+import {GET_PROFILE,PROFILE_LOADING , GET_ERRORS} from "./Types";
 import { userInfo } from 'os';
 
 // Get users profile
 export const getCurrentProfile = () => dispatch => {
+  dispatch(setLoading());
   axios.get('api/profile')
-    .then(res => console.log(res))
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    })
     .catch(err => {
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
+        type: GET_PROFILE,
+        payload: {}
       })
     })
 }
@@ -35,4 +41,10 @@ export const createProfile = (profileData, history) => dispatch => {
   axios('api/createOrUpdateProfile', userInfo)
     .then(res => history.push('/dashboard'))
     .catch(err => console.log(err.response.data))
+}
+
+export const setLoading = () => {
+  return {
+    type: PROFILE_LOADING
+  }
 }

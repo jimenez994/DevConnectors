@@ -15,6 +15,11 @@ export default function (state=initialState, action) {
         loading: false,
         profile: action.payload
       }
+    case PROFILE_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
     default:
       return state
   }
