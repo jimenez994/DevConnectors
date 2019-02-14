@@ -24,9 +24,9 @@ module.exports = function validateProfileInput(data) {
       errors.website = "Not a valid URL"
     }
   }
-  // if(Validator.isEmpty(data.skills)){
-  //   errors.skills = "Skills is required"
-  // }
+  if(isEmpty(data.skills)){
+    errors.skills = "Skills is required"
+  }
 
   if(!isEmpty(data.social.youtube)){
     if(!Validator.isURL(data.social.youtube)){

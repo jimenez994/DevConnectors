@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import isEmpty from "validation/is-empty";
-import Container from "components/Grid/Container";
 import {
   Paper,
   TextField,
   Grid,
-  Button,
   Tooltip,
   FormControl,
   Select,
@@ -15,7 +13,11 @@ import {
   MenuItem,
   FormHelperText,
   InputLabel,
-  Fab
+  Fab,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+  Typography
 } from "@material-ui/core";
 import {
   createOrUpdateProfile,
@@ -24,7 +26,7 @@ import {
 import styles from "assets/jss/views/profileFormStyles";
 import { withStyles } from "@material-ui/core/styles";
 import Loading from "views/common/Loading";
-// import NavigationIcon from '@material-ui/icons/Navigation';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -114,11 +116,10 @@ class ProfileForm extends Component {
     const { profile, loading } = this.props.profile;
     let content;
     if (profile === null || loading === true) {
-      content = <Loading />;
+      content = (<Loading />);
     } else {
-    }
-    return (
-      <Container justify="center">
+      content = (
+        <Grid container justify="center">
         <Grid item md={8} sm={10} xs={12} lg={6}>
           <Paper className={classes.paper}>
             <form onSubmit={this.onSubmit} className={classes.form}>
@@ -260,12 +261,72 @@ class ProfileForm extends Component {
                   multiline
                 />
               </Tooltip>
+              <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Social Media</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <div>
+                    <TextField
+                      fullWidth
+                      error={!isEmpty(this.state.errors.youtube)}
+                      helperText={this.state.errors.youtube}
+                      label="Youtube"
+                      onChange={this.onChangeSocial}
+                      value={this.state.profileInputs.social.youtube}
+                      name="youtube"
+                      margin="normal"
+                    />
+                    <TextField
+                      fullWidth
+                      error={!isEmpty(this.state.errors.twitter)}
+                      helperText={this.state.errors.twitter}
+                      label="Twitter"
+                      onChange={this.onChangeSocial}
+                      value={this.state.profileInputs.social.twitter}
+                      name="twitter"
+                      margin="normal"
+                    />
+
+                    <TextField
+                      fullWidth
+                      error={!isEmpty(this.state.errors.facebook)}
+                      helperText={this.state.errors.facebook}
+                      label="Facebook"
+                      onChange={this.onChangeSocial}
+                      value={this.state.profileInputs.social.facebook}
+                      name="facebook"
+                      margin="normal"
+                    />
+                    <TextField
+                      fullWidth
+                      error={!isEmpty(this.state.errors.linkedin)}
+                      helperText={this.state.errors.linkedin}
+                      label="Linkedin"
+                      onChange={this.onChangeSocial}
+                      value={this.state.profileInputs.social.linkedin}
+                      name="linkedin"
+                      margin="normal"
+                    />
+                    <TextField
+                      fullWidth
+                      error={!isEmpty(this.state.errors.instagram)}
+                      helperText={this.state.errors.instagram}
+                      label="Instagram"
+                      onChange={this.onChangeSocial}
+                      value={this.state.profileInputs.social.instagram}
+                      name="instagram"
+                      margin="normal"
+                    />
+                  </div>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
               <FormControl margin="normal">
                 <Fab
                   variant="extended"
                   aria-label="Delete"
-                  color='primary'
-                  type='submit'
+                  color="primary"
+                  type="submit"
                 >
                   {/* <NavigationIcon /> */}
                   Submit
@@ -274,7 +335,13 @@ class ProfileForm extends Component {
             </form>
           </Paper>
         </Grid>
-      </Container>
+      </Grid>
+      )
+    }
+    return (
+      <div>
+        {content}
+      </div>
     );
   }
 }
