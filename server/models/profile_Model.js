@@ -19,6 +19,9 @@ const ProfileSchema = new mongoose.Schema({
   website: {
     type: String
   },
+  githubUsername: {
+    type: String
+  },
   location: {
     type: String
   },

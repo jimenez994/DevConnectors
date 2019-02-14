@@ -3,11 +3,28 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import isEmpty from "validation/is-empty";
 import Container from "components/Grid/Container";
-import { Paper, TextField, Grid, Button, Tooltip, FormControl, Select, Input, MenuItem, FormHelperText, InputLabel } from "@material-ui/core";
-import { createOrUpdateProfile, getCurrentProfile } from "actions/profileActions";
+import {
+  Paper,
+  TextField,
+  Grid,
+  Button,
+  Tooltip,
+  FormControl,
+  Select,
+  Input,
+  MenuItem,
+  FormHelperText,
+  InputLabel,
+  Fab
+} from "@material-ui/core";
+import {
+  createOrUpdateProfile,
+  getCurrentProfile
+} from "actions/profileActions";
 import styles from "assets/jss/views/profileFormStyles";
 import { withStyles } from "@material-ui/core/styles";
-import Loading from 'views/common/Loading';
+import Loading from "views/common/Loading";
+// import NavigationIcon from '@material-ui/icons/Navigation';
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -39,18 +56,18 @@ class ProfileForm extends Component {
   componentDidMount = () => {
     const { profile } = this.props.profile;
     if (profile !== null) {
-      this.setState({profileInputs: profile})
-    }else{
-      this.props.getCurrentProfile()
+      this.setState({ profileInputs: profile });
+    } else {
+      this.props.getCurrentProfile();
     }
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile) {
-      this.setState({ profileInputs: nextProps.profile.profile});
+      this.setState({ profileInputs: nextProps.profile.profile });
     }
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors});
+      this.setState({ errors: nextProps.errors });
     }
   }
 
@@ -96,9 +113,9 @@ class ProfileForm extends Component {
     const { classes } = this.props;
     const { profile, loading } = this.props.profile;
     let content;
-    if(profile === null || loading === true){
-      content = (<Loading/>)
-    }else{
+    if (profile === null || loading === true) {
+      content = <Loading />;
+    } else {
     }
     return (
       <Container justify="center">
@@ -120,8 +137,13 @@ class ProfileForm extends Component {
                   margin="normal"
                 />
               </Tooltip>
-              <FormControl fullWidth error={!isEmpty(this.state.errors.professionalStatus)}>
-                <InputLabel htmlFor="age-helper">Professional Status *</InputLabel>
+              <FormControl
+                fullWidth
+                error={!isEmpty(this.state.errors.professionalStatus)}
+              >
+                <InputLabel htmlFor="age-helper">
+                  Professional Status *
+                </InputLabel>
                 <Select
                   value={this.state.profileInputs.professionalStatus}
                   onChange={this.onChangeMain}
@@ -134,12 +156,18 @@ class ProfileForm extends Component {
                   <MenuItem value="Junior Developer">Junior Developer</MenuItem>
                   <MenuItem value="Senior Developer">Senior Developer</MenuItem>
                   <MenuItem value="Manager">Manager</MenuItem>
-                  <MenuItem value="Student or Learning">Student or Learning</MenuItem>
-                  <MenuItem value="Instructort or Teacher">Instructor or Teacher</MenuItem>
+                  <MenuItem value="Student or Learning">
+                    Student or Learning
+                  </MenuItem>
+                  <MenuItem value="Instructort or Teacher">
+                    Instructor or Teacher
+                  </MenuItem>
                   <MenuItem value="Intern">Intern</MenuItem>
                   <MenuItem value="Other">Other</MenuItem>
                 </Select>
-                <FormHelperText>{this.state.errors.professionalStatus}</FormHelperText>
+                <FormHelperText>
+                  {this.state.errors.professionalStatus}
+                </FormHelperText>
               </FormControl>
               <Tooltip
                 title="Could be your own company or one you work for"
@@ -232,9 +260,17 @@ class ProfileForm extends Component {
                   multiline
                 />
               </Tooltip>
-              <Button fullWidth color="primary" type="submit">
-                Submit
-              </Button>
+              <FormControl margin="normal">
+                <Fab
+                  variant="extended"
+                  aria-label="Delete"
+                  color='primary'
+                  type='submit'
+                >
+                  {/* <NavigationIcon /> */}
+                  Submit
+                </Fab>
+              </FormControl>
             </form>
           </Paper>
         </Grid>

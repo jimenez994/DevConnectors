@@ -3,7 +3,8 @@ const styles = () => ({
     // marginTop: "10px"
   },
   form:{
-    margin: '15px'
+    margin: '15px',
+    textAlign: 'center'
   }
 })
 
