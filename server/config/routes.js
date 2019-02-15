@@ -14,4 +14,5 @@ module.exports = (app) => {
   // Profile
   app.get('/api/profile', private, profile.findProfile);
   app.post('/api/createOrUpdateProfile', private, profile.createOrUpdate);
+  app.get('/api/profiles', profile.allProfiles)
 } 

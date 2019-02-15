@@ -1,5 +1,5 @@
-import isEmpty from '../validation/is-empty';
-import { GET_PROFILE, PROFILE_LOADING } from 'actions/Types';
+// import isEmpty from '../validation/is-empty';
+import { GET_PROFILE, PROFILE_LOADING, GET_PROFILES } from 'actions/Types';
 
 const initialState = {
   loading: false,
@@ -14,6 +14,12 @@ export default function (state=initialState, action) {
         ...state,
         loading: false,
         profile: action.payload
+      }
+    case GET_PROFILES:
+      return {
+        ...state,
+        loading: false,
+        profiles: action.payload
       }
     case PROFILE_LOADING:
       return {

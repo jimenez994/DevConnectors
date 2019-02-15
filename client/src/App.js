@@ -12,7 +12,8 @@ import Register from "views/auth/registration";
 import Login from "views/auth/login";
 import PrivateRoute from 'views/common/PrivateRoute';
 import Dashboard from 'views/dashboard/Dashboard';
-import ProfileForm from "views/Profile/profileForm"
+import ProfileForm from "views/Profile/profileForm";
+import DevelopersFeed from "views/developers/Feed";
 
 // redux
 import { Provider } from "react-redux";
@@ -52,6 +53,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/profileForm" component={ProfileForm}/>
+              <Route exact path="/Developers" component={DevelopersFeed}/>
             </Switch>
             <Footer/>
           </div>

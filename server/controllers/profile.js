@@ -18,6 +18,15 @@ module.exports = {
       })
       .catch(err => res.status(400).json(err))
   },
+  allProfiles: (req, res) => {
+    profile.find()
+      .then(profiles => {
+        return res.status(200).json(profiles)
+      })
+      .catch(err => {
+        return res.status(400).json({profiles:"Not found"})
+      })
+  },
   createOrUpdate: (req, res) => {
     const {errors, isValid} = profileValidator(req.body);
     if(!isValid){

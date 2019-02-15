@@ -89,12 +89,13 @@ class Navbar extends Component {
         <AppBar position="static" className={classes.backStyle}>
           <Toolbar>
             <Link
+              className={classes.space}
               color="inherit"
               underline="none"
               component={RouterLink}
               to="/"
             >
-              DevConnectors 
+              DevConnectors
             </Link>
             <Link
               color="inherit"
