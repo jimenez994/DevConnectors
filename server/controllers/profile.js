@@ -19,7 +19,7 @@ module.exports = {
       .catch(err => res.status(400).json(err))
   },
   allProfiles: (req, res) => {
-    profile.find()
+    profile.find().populate('_user', 'firstName').exec()
       .then(profiles => {
         return res.status(200).json(profiles)
       })
