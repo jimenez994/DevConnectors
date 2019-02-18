@@ -36,11 +36,11 @@ module.exports = {
     // console.log(req.user._id, req.body);
     profile.findOne({_user: req.user._id})
       .then(result => {
-        // console.log(result);
         
-        // let str = req.body.skills
-        // let skills = str.split(",");
-        // req.body.skills = skills
+        let str = req.body.skills;
+        let skills = str.split(",");
+        req.body.skills = skills;
+        console.log(skills);
         // if user has a profile updated
         if(result){
           if(result.username !== req.body.username){

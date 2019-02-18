@@ -42,10 +42,10 @@ class ProfileForm extends Component {
         githubUsername: "",
         bio: "",
         social: {
-          youtube: " ",
-          twitter: " ",
-          facebook: " ",
-          linkedin: " ",
+          youtube: "",
+          twitter: "",
+          facebook: "",
+          linkedin: "",
           instagram: " "
         }
       },
@@ -56,8 +56,10 @@ class ProfileForm extends Component {
   componentWillMount() {}
 
   componentDidMount = () => {
+    // check if profile is  state, if not called the api
+    // this is good if the page is refreshed
     const { profile } = this.props.profile;
-    if (profile !== null) {
+    if (!isEmpty(profile)) {
       this.setState({ profileInputs: profile });
     } else {
       this.props.getCurrentProfile();
@@ -65,16 +67,11 @@ class ProfileForm extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.profile.profile);
-    
     if (!isEmpty(nextProps.profile.profile)) {
-      // this.setState({ profileInputs: nextProps.profile.profile });
-  console.log("got here 1");
+      this.setState({ profileInputs: nextProps.profile.profile });
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
-  // console.log("got here 2");
-  
     }
   }
 
