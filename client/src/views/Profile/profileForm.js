@@ -42,11 +42,11 @@ class ProfileForm extends Component {
         githubUsername: "",
         bio: "",
         social: {
-          youtube: "",
-          twitter: "",
-          facebook: "",
-          linkedin: "",
-          instagram: ""
+          youtube: " ",
+          twitter: " ",
+          facebook: " ",
+          linkedin: " ",
+          instagram: " "
         }
       },
       errors: {}
@@ -65,11 +65,16 @@ class ProfileForm extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.profile.profile) {
-      this.setState({ profileInputs: nextProps.profile.profile });
+    console.log(nextProps.profile.profile);
+    
+    if (!isEmpty(nextProps.profile.profile)) {
+      // this.setState({ profileInputs: nextProps.profile.profile });
+  console.log("got here 1");
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+  // console.log("got here 2");
+  
     }
   }
 

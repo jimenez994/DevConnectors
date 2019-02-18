@@ -25,7 +25,9 @@ class DevelopersFeed extends Component {
     }
     return (
       <Grid container justify='center'>
-        {content}
+        <Grid item md={8} sm={10} xs={12} lg={6} className={classes.content}>
+          {content}
+        </Grid>
       </Grid>
     )
   }
