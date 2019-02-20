@@ -6,9 +6,11 @@ import {
   getCurrentProfile,
   createOrUpdateProfile
 } from "actions/profileActions";
-import { Grid, Typography, Link } from "@material-ui/core";
+import { Grid, Typography, Link, Paper } from "@material-ui/core";
 import Loading from "views/common/Loading";
 import isEmpty from "../../validation/is-empty";
+import styles from "assets/jss/views/dashboardStyle";
+import { withStyles } from "@material-ui/core/styles";
 
 class Dashboard extends Component {
   componentDidMount = () => {
@@ -21,6 +23,7 @@ class Dashboard extends Component {
     );
   };
   render() {
+    const {classes} = this.props
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
     let content;
@@ -45,9 +48,13 @@ class Dashboard extends Component {
       }
     }
     return (
-      <Grid container>
-        <Typography>Welcome back, {user.firstName}</Typography>
-        {content}
+      <Grid container justify="center" className={classes.dashboardContainer}>
+        <Grid item md={8} sm={10} xs={12} lg={8} >
+          <Paper className={classes.paper}>
+            <Typography>Welcome back, {user.firstName}</Typography>
+            {content}
+          </Paper>
+        </Grid>
       </Grid>
     );
   }
@@ -66,4 +73,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCurrentProfile, createOrUpdateProfile }
-)(Dashboard);
+)(withStyles(styles)(Dashboard));

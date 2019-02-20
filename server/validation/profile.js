@@ -12,7 +12,6 @@ module.exports = function validateProfileInput(data) {
     errors.username = "Username must be between 6 and 30 characters"
   }
 
-  
   if(Validator.isEmpty(data.username)){
     errors.username = "Username is require"
   }
@@ -24,11 +23,13 @@ module.exports = function validateProfileInput(data) {
   if(Validator.isEmpty(data.professionalStatus)){
     errors.professionalStatus = "Status is require"
   }
+
   if(!isEmpty(data.website)){
     if(!Validator.isURL(data.website)){
       errors.website = "Not a valid URL"
     }
   }
+
   if(isEmpty(data.skills)){
     errors.skills = "Skills is required"
   }
@@ -38,21 +39,25 @@ module.exports = function validateProfileInput(data) {
       errors.youtube = "Not a valid URL"
     }
   }
+
   if(!isEmpty(data.social.twitter)){
     if(!Validator.isURL(data.social.twitter)){
       errors.twitter = "Not a valid URL"
     }
   }
+
   if(!isEmpty(data.social.facebook)){
     if(!Validator.isURL(data.social.facebook)){
       errors.facebook = "Not a valid URL"
     }
   }
+
   if(!isEmpty(data.social.linkedin)){
     if(!Validator.isURL(data.social.linkedin)){
       errors.linkedin = "Not a valid URL"
     }
   }
+
   if(!isEmpty(data.social.instagram)){
     if(!Validator.isURL(data.social.instagram)){
       errors.instagram = "Not a valid URL"
