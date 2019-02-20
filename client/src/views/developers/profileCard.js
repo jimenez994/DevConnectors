@@ -4,7 +4,8 @@ import { Card, CardMedia, CardContent, Typography, Fab } from "@material-ui/core
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/views/profileCardStyle";
 import {Check} from '@material-ui/icons';
-import { FaYoutube } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
+// import { FaYoutube } from 'react-icons/fa';
 
 
 
@@ -23,7 +24,7 @@ class ProfileCard extends Component {
       </Fab>
     ));
     return (
-      <a className={classes.cardContainer}>
+      <Link to={"/profile/"+ user.username} href={user._id} className={classes.cardContainer}>
         <Card className={classes.card}>
           <CardMedia
             className={classes.img}
@@ -39,7 +40,7 @@ class ProfileCard extends Component {
             {skillContent}
           </CardContent>
         </Card>
-      </a>
+      </Link>
     );
   }
 }

@@ -12,8 +12,13 @@ module.exports = function validateProfileInput(data) {
     errors.username = "Username must be between 6 and 30 characters"
   }
 
+  
   if(Validator.isEmpty(data.username)){
     errors.username = "Username is require"
+  }
+
+  if(!Validator.isAlphanumeric(data.username)){
+    errors.username = "Must be only letters and numbers"
   }
 
   if(Validator.isEmpty(data.professionalStatus)){

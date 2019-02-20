@@ -14,7 +14,7 @@ import PrivateRoute from 'views/common/PrivateRoute';
 import Dashboard from 'views/dashboard/Dashboard';
 import ProfileForm from "views/Profile/profileForm";
 import DevelopersFeed from "views/developers/Feed";
-
+import Profile from "views/Profile/profile"
 // redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -50,10 +50,11 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login}/>
+            <Route exact path="/Developers" component={DevelopersFeed}/>
+            <Route exact path="/profile/:username" component={Profile}/>
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/profileForm" component={ProfileForm}/>
-              <Route exact path="/Developers" component={DevelopersFeed}/>
             </Switch>
             <Footer/>
           </div>

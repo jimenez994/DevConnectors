@@ -14,7 +14,8 @@ const styles = () => ({
     width: "65%"
   },
   cardContainer:{
-    cursor: "pointer"
+    cursor: "pointer",
+    textDecoration: "none"
   }
 })
 

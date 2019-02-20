@@ -37,7 +37,7 @@ module.exports = {
     profile.findOne({_user: req.user._id})
       .then(result => {
         
-        let str = req.body.skills;
+        let str = req.body.skills + "";
         let skills = str.split(",");
         req.body.skills = skills;
         console.log(skills);
