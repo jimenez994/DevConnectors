@@ -6,7 +6,7 @@ import {
   getCurrentProfile,
   createOrUpdateProfile
 } from "actions/profileActions";
-import { Grid, Typography, Link, Paper } from "@material-ui/core";
+import { Grid, Typography, Link, Paper, Card, CardContent } from "@material-ui/core";
 import Loading from "views/common/Loading";
 import isEmpty from "../../validation/is-empty";
 import styles from "assets/jss/views/dashboardStyle";
@@ -32,9 +32,22 @@ class Dashboard extends Component {
     } else {
       if (isEmpty(profile)) {
         content = (
-          <Link underline="none" component={RouterLink} to="/profileForm">
-            Create Profile
-          </Link>
+          <Card>
+            <CardContent>
+              <Typography color="textSecondary" variant="title">
+                Dashboard
+              </Typography>
+              <Typography variant="subtitle2">
+                Welcome {user.firstName}!
+              </Typography>
+              <Typography className={classes.textDetailsN}>
+              You have not yet setup a profile, please add some info
+              </Typography>
+              <Link underline="none" component={RouterLink} to="/profileForm">
+                Create Profile
+              </Link>
+            </CardContent>
+          </Card>
         );
       } else {
         content = (
@@ -51,7 +64,7 @@ class Dashboard extends Component {
       <Grid container justify="center" className={classes.dashboardContainer}>
         <Grid item md={8} sm={10} xs={12} lg={8} >
           <Paper className={classes.paper}>
-            <Typography>Welcome back, {user.firstName}</Typography>
+            {/* <Typography>Welcome back, {user.firstName}</Typography> */}
             {content}
           </Paper>
         </Grid>

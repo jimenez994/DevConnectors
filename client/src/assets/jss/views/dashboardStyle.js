@@ -5,6 +5,9 @@ const styles = () => ({
   paper:{
     marginTop:"10px",
     marginBottom:"10px"
+  },
+  textDetailsN:{
+    marginBottom: "20px"
   }
 })
 

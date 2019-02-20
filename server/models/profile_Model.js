@@ -32,11 +32,11 @@ const ProfileSchema = new mongoose.Schema({
   bio: {
     type: String
   }, 
-  experience: [{
+  _experience: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Experience",
   }],
-  education: [{
+  _education: [{
     type: mongoose.Schema.Types.ObjectId,
     ref:"Education"
   }],
