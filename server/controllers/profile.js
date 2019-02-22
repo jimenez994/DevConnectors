@@ -1,15 +1,12 @@
 const mongoose = require("mongoose");
 const profile = mongoose.model("Profile");
-const user = mongoose.model("User");
 const profileValidator = require("./../validation/profile");
 const isEmpty = require("./../validation/is-empty");
-
-let opts = { runValidators: true };
 
 module.exports = {
   findProfile: (req, res) => {
     profile
-      .findOne({ _user: req.user._id })
+      .findOne({ _user: req.user._id }).populate("_experience").populate("_education").exec()
       .then(profile => {
         if (isEmpty(profile)) {
           res.status(400).json({ profile: false });

@@ -13,6 +13,9 @@ import isEmpty from "../../../validation/is-empty";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import { DatePicker } from "material-ui-pickers";
+import {connect} from 'react-redux';
+import { addEducation } from 'actions/profileActions';
+import PropTypes from 'prop-types';
 
 class EducationForm extends Component {
   constructor(props) {
@@ -36,7 +39,8 @@ class EducationForm extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    this.setState({ showForm: false });
+    this.setState({ showForm: false });    
+    this.props.addEducation(this.state.educationInput)
   };
   onChange = e => {
     e.persist();
@@ -133,6 +137,7 @@ class EducationForm extends Component {
             error={!isEmpty(this.state.errors.description)}
             helperText={this.state.errors.description}
             fullWidth
+            multiline
             label="Description"
             name="description"
             onChange={this.onChange}
@@ -162,6 +167,13 @@ class EducationForm extends Component {
   }
 }
 
-EducationForm.propTypes = {};
+EducationForm.propTypes = {
+  addEducation: PropTypes.func.isRequired,
+  // profile: PropTypes.object.isRequired
+};
 
-export default EducationForm;
+const mapStateToProps = state => ({
+  // profile: state.profile
+})
+
+export default connect(mapStateToProps,{addEducation})(EducationForm);

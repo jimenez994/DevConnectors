@@ -1,6 +1,5 @@
 import axios from 'axios';
-import {GET_PROFILE, GET_PROFILES, PROFILE_LOADING , GET_ERRORS} from "./Types";
-import { userInfo } from 'os';
+import {GET_PROFILE, GET_PROFILES, PROFILE_LOADING , GET_ERRORS, ADD_EDUCATION} from "./Types";
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -52,9 +51,16 @@ export const createOrUpdateProfile = (profileData, history) => dispatch => {
     })
 }
 
-export const createProfile = (profileData, history) => dispatch => {
-  axios('api/createOrUpdateProfile', userInfo)
-    .then(res => history.push('/dashboard'))
+export const addEducation = (educationInput) => dispatch => {
+  console.log(educationInput);
+  
+  axios.post(`api/addEducation`, educationInput)
+    .then(res => {
+      dispatch({
+        type: ADD_EDUCATION,
+        payload: res.data
+      })
+    })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
