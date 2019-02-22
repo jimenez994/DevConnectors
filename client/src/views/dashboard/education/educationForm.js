@@ -5,7 +5,8 @@ import {
   TextField,
   FormControl,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  CircularProgress
 } from "@material-ui/core";
 import { School } from "@material-ui/icons";
 import React, { Component } from "react";
@@ -13,9 +14,9 @@ import isEmpty from "../../../validation/is-empty";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import { DatePicker } from "material-ui-pickers";
-import {connect} from 'react-redux';
-import { addEducation } from 'actions/profileActions';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { addEducation } from "actions/profileActions";
+import PropTypes from "prop-types";
 
 class EducationForm extends Component {
   constructor(props) {
@@ -34,13 +35,18 @@ class EducationForm extends Component {
       errors: {}
     };
   }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   onClickShowForm = () => {
     this.setState({ showForm: true });
   };
   onSubmit = e => {
     e.preventDefault();
-    this.setState({ showForm: false });    
-    this.props.addEducation(this.state.educationInput)
+    // this.setState({ showForm: false });
+    this.props.addEducation(this.state.educationInput);
   };
   onChange = e => {
     e.persist();
@@ -58,10 +64,10 @@ class EducationForm extends Component {
       ...prevState,
       educationInput: {
         ...prevState.educationInput,
-        [name] : event.target.checked
+        [name]: event.target.checked
       }
     }));
-  }
+  };
   onChangeDate = name => date => {
     this.setState(prevState => ({
       ...prevState,
@@ -72,6 +78,13 @@ class EducationForm extends Component {
     }));
   };
   render() {
+    const { educationLoading } = this.props.profile;
+    let submitButtom;
+    if (educationLoading) {
+      submitButtom = <CircularProgress/>;
+    }else{
+      submitButtom = <Button type="submit">Add</Button>
+    }
     let content;
     if (this.state.showForm) {
       content = (
@@ -108,7 +121,7 @@ class EducationForm extends Component {
               <DatePicker
                 label="From"
                 value={this.state.educationInput.from}
-                onChange={this.onChangeDate('from')}
+                onChange={this.onChangeDate("from")}
               />
             </MuiPickersUtilsProvider>
           </FormControl>
@@ -117,22 +130,22 @@ class EducationForm extends Component {
               <DatePicker
                 label="To"
                 value={this.state.educationInput.to}
-                onChange={this.onChangeDate('to')}
+                onChange={this.onChangeDate("to")}
               />
             </MuiPickersUtilsProvider>
           </FormControl>
           <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.educationInput.current}
-              onChange={this.onChangeCheck("current")}
-              value="current"
-              name="current"
-              color="primary"
-            />
-          }
-          label="Primary"
-        />
+            control={
+              <Checkbox
+                checked={this.state.educationInput.current}
+                onChange={this.onChangeCheck("current")}
+                value="current"
+                name="current"
+                color="primary"
+              />
+            }
+            label="Primary"
+          />
           <TextField
             error={!isEmpty(this.state.errors.description)}
             helperText={this.state.errors.description}
@@ -143,7 +156,7 @@ class EducationForm extends Component {
             onChange={this.onChange}
             value={this.state.educationInput.description}
           />
-          <Button type="submit">Add</Button>
+          {submitButtom}
         </form>
       );
     } else {
@@ -168,12 +181,16 @@ class EducationForm extends Component {
 }
 
 EducationForm.propTypes = {
-  addEducation: PropTypes.func.isRequired,
+  addEducation: PropTypes.func.isRequired
   // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  // profile: state.profile
-})
+  profile: state.profile,
+  errors: state.errors
+});
 
-export default connect(mapStateToProps,{addEducation})(EducationForm);
+export default connect(
+  mapStateToProps,
+  { addEducation }
+)(EducationForm);

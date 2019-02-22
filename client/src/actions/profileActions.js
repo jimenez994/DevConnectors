@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_PROFILE, GET_PROFILES, PROFILE_LOADING , GET_ERRORS, ADD_EDUCATION} from "./Types";
+import {GET_PROFILE, GET_PROFILES, PROFILE_LOADING , GET_ERRORS, ADD_EDUCATION, SET_LOADING_EDUCATION} from "./Types";
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -52,8 +52,7 @@ export const createOrUpdateProfile = (profileData, history) => dispatch => {
 }
 
 export const addEducation = (educationInput) => dispatch => {
-  console.log(educationInput);
-  
+  dispatch({type: SET_LOADING_EDUCATION});
   axios.post(`api/addEducation`, educationInput)
     .then(res => {
       dispatch({

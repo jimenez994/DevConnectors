@@ -130,8 +130,8 @@ class Dashboard extends Component {
                 <Card>
                   <CardContent>
                     <Typography variant="subtitle2">Education</Typography>
-                    <EducationForm className={classes.educationForm} />
                     {educationContent}
+                    <EducationForm className={classes.educationForm} />
                   </CardContent>
                 </Card>
               </Grid>
