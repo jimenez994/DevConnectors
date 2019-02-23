@@ -15,7 +15,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import { DatePicker } from "material-ui-pickers";
 import { connect } from "react-redux";
-import { addEducation } from "actions/profileActions";
+import { addEducation,setEducationCompletion } from "actions/profileActions";
 import PropTypes from "prop-types";
 
 class EducationForm extends Component {
@@ -37,16 +37,30 @@ class EducationForm extends Component {
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({errors: nextProps.errors});
+    }
+    if(nextProps.profile.educationCompleted){
+      this.setState(state => ({
+        ...state,
+        educationInput: {
+          ...state.educationInput,
+          school: "",
+          degree: "",
+          fieldOfStudy: "",
+          from: new Date(),
+          to: new Date(),
+          current: false,
+          description: ""
+        }
+      }));
     }
   }
   onClickShowForm = () => {
-    this.setState({ showForm: true });
+    this.props.setEducationCompletion(false)
   };
   onSubmit = e => {
     e.preventDefault();
-    // this.setState({ showForm: false });
-    this.props.addEducation(this.state.educationInput);
+    this.props.addEducation(this.state.educationInput)
   };
   onChange = e => {
     e.persist();
@@ -78,15 +92,15 @@ class EducationForm extends Component {
     }));
   };
   render() {
-    const { educationLoading } = this.props.profile;
+    const { educationLoading, educationCompleted } = this.props.profile;
     let submitButtom;
     if (educationLoading) {
       submitButtom = <CircularProgress/>;
     }else{
       submitButtom = <Button type="submit">Add</Button>
     }
-    let content;
-    if (this.state.showForm) {
+    let content;    
+    if (!educationCompleted) {
       content = (
         <form onSubmit={this.onSubmit}>
           <TextField
@@ -181,7 +195,8 @@ class EducationForm extends Component {
 }
 
 EducationForm.propTypes = {
-  addEducation: PropTypes.func.isRequired
+  addEducation: PropTypes.func.isRequired,
+  setEducationCompletion: PropTypes.func.isRequired,
   // profile: PropTypes.object.isRequired
 };
 
@@ -192,5 +207,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addEducation }
+  { addEducation,setEducationCompletion }
 )(EducationForm);

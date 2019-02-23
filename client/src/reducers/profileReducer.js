@@ -4,14 +4,16 @@ import {
   PROFILE_LOADING,
   SET_LOADING_EDUCATION,
   GET_PROFILES,
-  ADD_EDUCATION
+  ADD_EDUCATION,
+  SET_EDUCATION_COMPLETION
 } from "actions/Types";
 
 const initialState = {
   loading: false,
   educationLoading: false,
+  educationCompleted: true,
   profile: null,
-  profiles: null,
+  profiles: null
 };
 
 export default function(state = initialState, action) {
@@ -20,7 +22,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        profile: action.payload,
+        profile: action.payload
+      };
+    case PROFILE_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     case GET_PROFILES:
       return {
@@ -28,28 +35,28 @@ export default function(state = initialState, action) {
         loading: false,
         profiles: action.payload
       };
+
+  //Education 
     case ADD_EDUCATION:
       return {
         ...state,
         educationLoading: false,
+        educationCompleted: true,
         profile: {
           ...state.profile,
-          _education:[
-            ...state.profile._education, action.payload
-          ]
+          _education: [...state.profile._education, action.payload]
         }
-        // _education: [action.payload, ...state._education]
       };
-    case SET_LOADING_EDUCATION:
+    case SET_EDUCATION_COMPLETION:
       return {
         ...state,
-        educationLoading: true
+        educationCompleted: action.payload
       }
-    case PROFILE_LOADING:
-      return {
-        ...state,
-        loading: true
-      };
+    case SET_LOADING_EDUCATION:
+        return {
+          ...state,
+          educationLoading: action.payload
+        };
     default:
       return state;
   }
