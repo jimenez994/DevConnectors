@@ -60,7 +60,7 @@ export const createOrUpdateProfile = (profileData, history) => dispatch => {
       });
     });
 };
-
+// Add Education
 export const addEducation = educationInput => dispatch => {
   axios
     .post(`api/addEducation`, educationInput)
@@ -79,6 +79,16 @@ export const addEducation = educationInput => dispatch => {
       });
     });
 };
+// Delete Education
+export const deleteEducation = educationId => dispatch => {
+  axios.post(`api/deleteEducation/${educationId}`)
+  .then(res => {
+    console.log(res.data);
+  })
+  .catch(err => {console.log(err);
+  })
+}
+
 export const setEducationCompletion = input => dispatch => {
   dispatch({
     type: SET_EDUCATION_COMPLETION,

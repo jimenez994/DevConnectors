@@ -27,7 +27,6 @@ module.exports = function validateEducationInput(data) {
       errors.from = "Starting date must be before ending date"
     }
   }
-  
   if(!data.from > currentDate){
     errors.from = "Starting date must be before current date"
   }
@@ -36,5 +35,5 @@ module.exports = function validateEducationInput(data) {
     errors,
     isValid: isEmpty(errors)
   }
-  
+
 }

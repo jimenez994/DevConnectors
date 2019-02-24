@@ -18,7 +18,8 @@ module.exports = (app) => {
   app.get('/api/profiles', profile.allProfiles);
 
   // Education
-  app.post('/api/addEducation', private, education.addEducation)
+  app.post('/api/addEducation', private, education.addEducation);
+  app.post('api/deleteEducation/:id', private, education.deleteOne);
 
 
 } 

@@ -22,5 +22,10 @@ module.exports = {
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
-  }
+    },
+    deleteOne: (req, res) => {
+      education.deleteOne({_id:req.params})
+        .then(result => res.status(200).json({delete: "success"}))
+        .catch(err => res.status(400).json(err))
+    }
 };

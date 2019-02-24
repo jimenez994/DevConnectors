@@ -10,6 +10,7 @@ import { Link as RouterLink } from "react-router-dom";
 import Loading from "views/common/Loading";
 import EducationForm from "views/dashboard/education/educationForm";
 import isEmpty from "../../validation/is-empty";
+import Education from "../dashboard/education/education";
 
 
 class Dashboard extends Component {
@@ -71,7 +72,7 @@ class Dashboard extends Component {
       } else {
         // Education Content
         if (!isEmpty(profile._education)) {
-          educationContent = <CardContent>some education</CardContent>;
+          educationContent = <Education educationList={profile._education}/>;
         }
         // Experience Content
         if (!isEmpty(profile._experience)) {
