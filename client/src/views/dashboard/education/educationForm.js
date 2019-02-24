@@ -12,8 +12,7 @@ import { School } from "@material-ui/icons";
 import React, { Component } from "react";
 import isEmpty from "../../../validation/is-empty";
 import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider } from "material-ui-pickers";
-import { DatePicker } from "material-ui-pickers";
+import { MuiPickersUtilsProvider,DatePicker  } from "material-ui-pickers";
 import { connect } from "react-redux";
 import { addEducation,setEducationCompletion } from "actions/profileActions";
 import PropTypes from "prop-types";
@@ -130,24 +129,42 @@ class EducationForm extends Component {
             onChange={this.onChange}
             value={this.state.educationInput.fieldOfStudy}
           />
-          <FormControl fullWidth>
+          <FormControl fullWidth >
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
-                label="From"
+                keyboard
+                format="MM/dd/yyyy"
+                // placeholder="11/09/1994"
+                mask={value =>
+                  value ? [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/] : []
+                }
+                helperText={this.state.errors.from}
+                error={!isEmpty(this.state.errors.from)}
+                label="Start"
                 value={this.state.educationInput.from}
                 onChange={this.onChangeDate("from")}
               />
             </MuiPickersUtilsProvider>
           </FormControl>
-          <FormControl fullWidth>
+          <FormControl fullWidth >
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
+                disabled={this.state.educationInput.current}
+                keyboard
+                format="MM/dd/yyyy"
+                // placeholder="11/09/1994"
+                mask={value =>
+                  value ? [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/] : []
+                }
+                helperText={this.state.errors.to}
+                error={!isEmpty(this.state.errors.to)}
                 label="To"
                 value={this.state.educationInput.to}
                 onChange={this.onChangeDate("to")}
               />
             </MuiPickersUtilsProvider>
           </FormControl>
+          
           <FormControlLabel
             control={
               <Checkbox
@@ -158,7 +175,7 @@ class EducationForm extends Component {
                 color="primary"
               />
             }
-            label="Primary"
+            label="Current"
           />
           <TextField
             error={!isEmpty(this.state.errors.description)}
