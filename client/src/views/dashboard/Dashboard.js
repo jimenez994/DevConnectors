@@ -11,7 +11,8 @@ import Loading from "views/common/Loading";
 import EducationForm from "views/dashboard/education/educationForm";
 import isEmpty from "../../validation/is-empty";
 import EducationFeed from "./education/educationFeed";
-
+import ExperienceFeed from "./experience/experienceFeed";
+import ExperienceForm from './experience/experienceForm'
 
 class Dashboard extends Component {
   componentDidMount = () => {
@@ -76,7 +77,7 @@ class Dashboard extends Component {
         }
         // Experience Content
         if (!isEmpty(profile._experience)) {
-          experienceContent = <CardContent>some experience</CardContent>;
+          experienceContent = <ExperienceFeed experienceList={profile._experience}/>;
         }
         content = (
           <div>
@@ -142,11 +143,8 @@ class Dashboard extends Component {
                 <Card>
                   <CardContent>
                     <Typography variant="title">Experience</Typography>
-                    <Link underline="none" component={RouterLink} to="#">
-                      <IoIosAdd />
-                      Add experience
-                    </Link>
                     {experienceContent}
+                    <ExperienceForm/>
                   </CardContent>
                 </Card>
               </Grid>

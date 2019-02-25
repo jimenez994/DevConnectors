@@ -3,18 +3,18 @@ const mongoose = require('mongoose');
 const ExperienceSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, "Title is required"]
+    required: true
   },
   company: {
     type: String,
-    required: [true, "Company is required"]
+    required: true
   },
-  locatrion:{
+  location:{
     type: String
   },
   from: {
     type: Date,
-    required:[true, "Start date is required"]
+    required:true
   }, 
   to: {
     type: Date

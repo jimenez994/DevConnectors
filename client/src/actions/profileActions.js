@@ -7,7 +7,10 @@ import {
   CLEAR_ERRORS,
   ADD_EDUCATION,
   SET_EDUCATION_COMPLETION,
-  DELETE_EDUCATION
+  DELETE_EDUCATION,
+  ADD_EXPERIENCE,
+  DELETE_EXPERIENCE,
+  SET_EXPERIENCE_COMPLETION
 } from "./Types";
 
 // Get current profile
@@ -98,6 +101,47 @@ export const deleteEducation = educationId => dispatch => {
 export const setEducationCompletion = input => dispatch => {
   dispatch({
     type: SET_EDUCATION_COMPLETION,
+    payload: input
+  })
+}
+
+// Add Experience
+export const addExperience = experienceInput => dispatch => {
+  axios
+    .post(`api/addExperience`, experienceInput)
+    .then(res => {
+      dispatch({type: CLEAR_ERRORS})
+      dispatch({
+        type: ADD_EXPERIENCE,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      setExperienceCompletion(true)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+// Delete Experience
+export const deleteExperience = experienceId => dispatch => {
+  console.log(experienceId);
+  
+  axios.delete(`api/deleteExperience/${experienceId}`)
+  .then(res => {
+    dispatch({
+      type: DELETE_EXPERIENCE,
+      payload: experienceId
+    })
+  })
+  .catch(err => {console.log(err);
+  })
+}
+
+export const setExperienceCompletion = input => dispatch => {
+  dispatch({
+    type: SET_EXPERIENCE_COMPLETION,
     payload: input
   })
 }

@@ -1,7 +1,9 @@
 const auth = require('../controllers/auth');
 const profile = require('../controllers/profile')
 const passport = require('passport');
-const education = require('../controllers/education')
+const education = require('../controllers/education');
+const experience = require('../controllers/experience');
+
 
 module.exports = (app) => {
   // with auth routes can be assigned to become private
@@ -21,5 +23,7 @@ module.exports = (app) => {
   app.post('/api/addEducation', private, education.addEducation);
   app.delete('/api/deleteEducation/:id', private, education.deleteOne);
 
-
+    // Experience
+    app.post('/api/addExperience', private, experience.addExperience);
+    app.delete('/api/deleteExperience/:id', private, experience.deleteOne);
 } 
