@@ -6,7 +6,8 @@ import {
   GET_ERRORS,
   CLEAR_ERRORS,
   ADD_EDUCATION,
-  SET_EDUCATION_COMPLETION
+  SET_EDUCATION_COMPLETION,
+  DELETE_EDUCATION
 } from "./Types";
 
 // Get current profile
@@ -81,9 +82,14 @@ export const addEducation = educationInput => dispatch => {
 };
 // Delete Education
 export const deleteEducation = educationId => dispatch => {
-  axios.post(`api/deleteEducation/${educationId}`)
+  console.log(educationId);
+  
+  axios.delete(`api/deleteEducation/${educationId}`)
   .then(res => {
-    console.log(res.data);
+    dispatch({
+      type: DELETE_EDUCATION,
+      payload: educationId
+    })
   })
   .catch(err => {console.log(err);
   })

@@ -19,7 +19,7 @@ module.exports = (app) => {
 
   // Education
   app.post('/api/addEducation', private, education.addEducation);
-  app.post('api/deleteEducation/:id', private, education.deleteOne);
+  app.delete('/api/deleteEducation/:id', private, education.deleteOne);
 
 
 } 

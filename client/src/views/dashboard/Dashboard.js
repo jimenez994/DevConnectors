@@ -10,7 +10,7 @@ import { Link as RouterLink } from "react-router-dom";
 import Loading from "views/common/Loading";
 import EducationForm from "views/dashboard/education/educationForm";
 import isEmpty from "../../validation/is-empty";
-import Education from "../dashboard/education/education";
+import EducationFeed from "./education/educationFeed";
 
 
 class Dashboard extends Component {
@@ -72,7 +72,7 @@ class Dashboard extends Component {
       } else {
         // Education Content
         if (!isEmpty(profile._education)) {
-          educationContent = <Education educationList={profile._education}/>;
+          educationContent = <EducationFeed educationList={profile._education}/>;
         }
         // Experience Content
         if (!isEmpty(profile._experience)) {
@@ -130,7 +130,7 @@ class Dashboard extends Component {
               <Grid item lg={5} md={5} sm={12} xs={12}>
                 <Card>
                   <CardContent>
-                    <Typography variant="subtitle2">Education</Typography>
+                    <Typography variant="title">Education</Typography>
                     {educationContent}
                     <EducationForm className={classes.educationForm} />
                   </CardContent>
@@ -141,7 +141,7 @@ class Dashboard extends Component {
               <Grid item lg={5} md={5} sm={12} xs={12}>
                 <Card>
                   <CardContent>
-                    <Typography variant="subtitle2">Experience</Typography>
+                    <Typography variant="title">Experience</Typography>
                     <Link underline="none" component={RouterLink} to="#">
                       <IoIosAdd />
                       Add experience

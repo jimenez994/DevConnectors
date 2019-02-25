@@ -7,6 +7,7 @@ import {
   ADD_EDUCATION,
   SET_EDUCATION_COMPLETION
 } from "actions/Types";
+import { DELETE_EDUCATION } from "../actions/Types";
 
 const initialState = {
   loading: false,
@@ -36,7 +37,7 @@ export default function(state = initialState, action) {
         profiles: action.payload
       };
 
-  //Education 
+    //Education
     case ADD_EDUCATION:
       return {
         ...state,
@@ -47,16 +48,26 @@ export default function(state = initialState, action) {
           _education: [...state.profile._education, action.payload]
         }
       };
+    case DELETE_EDUCATION:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          _education: state.profile._education.filter(
+            education => education._id !== action.payload
+          )
+        }
+      };
     case SET_EDUCATION_COMPLETION:
       return {
         ...state,
         educationCompleted: action.payload
-      }
+      };
     case SET_LOADING_EDUCATION:
-        return {
-          ...state,
-          educationLoading: action.payload
-        };
+      return {
+        ...state,
+        educationLoading: action.payload
+      };
     default:
       return state;
   }

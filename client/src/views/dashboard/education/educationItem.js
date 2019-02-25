@@ -7,9 +7,9 @@ import {
   CardHeader,
   Avatar,
   IconButton,
-  Menu,
-  MenuItem
 } from "@material-ui/core";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Moment from "react-moment";
 import { deleteEducation } from "actions/profileActions";
 import { connect } from "react-redux";
@@ -24,62 +24,65 @@ class Education extends Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
+  deleteItem = id =>() => {
+    this.props.deleteEducation(id)
     this.setState({ anchorEl: null });
   };
+  handleClose =() => {
+    this.setState({ anchorEl: null });
+  }
 
   render() {
     const { anchorEl } = this.state;
-    const { educationList } = this.props;
-    let content = educationList.map(item => (
-      <Card key={item._id} style={{ marginBottom: "10px" }}>
+    const { education } = this.props;
+    let content = (
+      <Card key={education._id} style={{ marginBottom: "10px" }}>
         <CardHeader
-          style={{ paddingBottom: "0px" }}
+          style={{paddingBottom: "0px"}}
           avatar={
             <Avatar>
               <School />
             </Avatar>
           }
           action={
-            <div>
+            <React.Fragment>
               <IconButton
-                aria-owns={anchorEl ? "simple-menu" : undefined}
+                aria-owns={anchorEl ? `${education._id}` : undefined}
                 aria-haspopup="true"
                 onClick={this.handleClick}
               >
                 <MoreVert />
               </IconButton>
               <Menu
-                style={{boxShadow:"1px 1px"}}
-                id="simple-menu"
+                id={education._id}
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+                <MenuItem onClick={this.deleteItem(education._id)}>Delete</MenuItem>
               </Menu>
-            </div>
+            </React.Fragment>
           }
-          title={item.school}
+          title={education.school}
           subheader={
             <Typography color="textSecondary">
-              <Moment format="MMM YYYY">{item.from}</Moment> -{" "}
-              <Moment format="MMM YYYY">{item.to}</Moment>
+              <Moment format="MMM YYYY">{education.from}</Moment> -{" "}
+              <Moment format="MMM YYYY">{education.to}</Moment>
             </Typography>
           }
         />
         <CardContent>
-          {item.degree + ", " + item.fieldOfStudy}
-          <Typography>{item.description}</Typography>
+          {education.degree + ", " + education.fieldOfStudy}
+          <Typography variant="body1"  style={{whiteSpace: 'pre-line', marginTop:"5px"}}>{`${education.description}`}</Typography>
         </CardContent>
       </Card>
-    ));
+    );
     return <div>{content}</div>;
   }
 }
 
 Education.propTypes = {
-  educationList: PropTypes.array.isRequired,
+  education: PropTypes.object.isRequired,
   deleteEducation: PropTypes.func.isRequired
 };
 
