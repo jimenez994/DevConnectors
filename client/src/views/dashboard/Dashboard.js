@@ -4,7 +4,6 @@ import { createOrUpdateProfile, getCurrentProfile } from "actions/profileActions
 import styles from "assets/jss/views/dashboardStyle";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { IoIosAdd } from "react-icons/io";
 import { connect } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import Loading from "views/common/Loading";

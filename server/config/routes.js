@@ -18,6 +18,7 @@ module.exports = (app) => {
   app.get('/api/profile', private, profile.findProfile);
   app.post('/api/createOrUpdateProfile', private, profile.createOrUpdate);
   app.get('/api/profiles', profile.allProfiles);
+  app.get('/api/profile/:username', profile.findProfileByUsername);
 
   // Education
   app.post('/api/addEducation', private, education.addEducation);

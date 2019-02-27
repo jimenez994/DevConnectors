@@ -1,21 +1,12 @@
-import {
-  Avatar,
-  Button,
-  Chip,
-  TextField,
-  FormControl,
-  FormControlLabel,
-  Checkbox,
-  CircularProgress
-} from "@material-ui/core";
-import { School } from "@material-ui/icons";
-import React, { Component } from "react";
-import isEmpty from "../../../validation/is-empty";
 import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider,DatePicker  } from "material-ui-pickers";
-import { connect } from "react-redux";
-import { addEducation,setEducationCompletion } from "actions/profileActions";
+import { Button, Checkbox, CircularProgress, FormControl, FormControlLabel, TextField } from "@material-ui/core";
+import { School } from "@material-ui/icons";
+import { addEducation, setEducationCompletion } from "actions/profileActions";
+import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import isEmpty from "../../../validation/is-empty";
 
 class EducationForm extends Component {
   constructor(props) {

@@ -31,6 +31,19 @@ export const getCurrentProfile = () => dispatch => {
       });
     });
 };
+// Get profile by username
+export const getProfileByUsername = username => dispatch => {
+  dispatch(setLoading());  
+  axios
+    .get(`/api/profile/${username}`)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
 // Get users profiles
 export const getProfiles = () => dispatch => {
   dispatch(setLoading());
@@ -69,14 +82,14 @@ export const addEducation = educationInput => dispatch => {
   axios
     .post(`api/addEducation`, educationInput)
     .then(res => {
-      dispatch({type: CLEAR_ERRORS})
+      dispatch({ type: CLEAR_ERRORS });
       dispatch({
         type: ADD_EDUCATION,
         payload: res.data
       });
     })
     .catch(err => {
-      setEducationCompletion(true)
+      setEducationCompletion(true);
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
@@ -85,39 +98,39 @@ export const addEducation = educationInput => dispatch => {
 };
 // Delete Education
 export const deleteEducation = educationId => dispatch => {
-  console.log(educationId);
-  
-  axios.delete(`api/deleteEducation/${educationId}`)
-  .then(res => {
-    dispatch({
-      type: DELETE_EDUCATION,
-      payload: educationId
+  axios
+    .delete(`api/deleteEducation/${educationId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_EDUCATION,
+        payload: educationId
+      });
     })
-  })
-  .catch(err => {console.log(err);
-  })
-}
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 export const setEducationCompletion = input => dispatch => {
   dispatch({
     type: SET_EDUCATION_COMPLETION,
     payload: input
-  })
-}
+  });
+};
 
 // Add Experience
 export const addExperience = experienceInput => dispatch => {
   axios
     .post(`api/addExperience`, experienceInput)
     .then(res => {
-      dispatch({type: CLEAR_ERRORS})
+      dispatch({ type: CLEAR_ERRORS });
       dispatch({
         type: ADD_EXPERIENCE,
         payload: res.data
       });
     })
     .catch(err => {
-      setExperienceCompletion(true)
+      setExperienceCompletion(true);
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
@@ -126,25 +139,25 @@ export const addExperience = experienceInput => dispatch => {
 };
 // Delete Experience
 export const deleteExperience = experienceId => dispatch => {
-  console.log(experienceId);
-  
-  axios.delete(`api/deleteExperience/${experienceId}`)
-  .then(res => {
-    dispatch({
-      type: DELETE_EXPERIENCE,
-      payload: experienceId
+  axios
+    .delete(`api/deleteExperience/${experienceId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_EXPERIENCE,
+        payload: experienceId
+      });
     })
-  })
-  .catch(err => {console.log(err);
-  })
-}
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 export const setExperienceCompletion = input => dispatch => {
   dispatch({
     type: SET_EXPERIENCE_COMPLETION,
     payload: input
-  })
-}
+  });
+};
 
 export const setLoading = () => {
   return {

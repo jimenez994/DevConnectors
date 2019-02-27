@@ -1,52 +1,35 @@
-import React from 'react';
-// import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { IconButton, Card, CardHeader } from '@material-ui/core';
+import { Grid } from "@material-ui/core";
+import { getProfileByUsername } from 'actions/profileActions';
+import React from "react";
+import { connect } from "react-redux";
+import Header from "./header";
+import isEmpty from "../../validation/is-empty";
+import Loading from 'views/common/Loading';
 
 class SimpleMenu extends React.Component {
-  state = {
-    anchorEl: null,
+  componentDidMount() {
+    if (this.props.match.params.username) {
+      this.props.getProfileByUsername(this.props.match.params.username);
+    }
   };
-
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
   render() {
-    const { anchorEl } = this.state;
+    const {profile, loading} = this.props.profile;
+    let content;
+    if(isEmpty(profile) || loading){
+      content= <Loading/>
+    }else{
+      content= <Header profile={profile} />
 
+    }
     return (
-      <Card>
-        <CardHeader
-          action={
-            <div>
-        <IconButton
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          Open Menu
-        </IconButton>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-        </Menu>
-        </div>
-          }
-        />
-      </Card>
+      <Grid container justify="center" spacing={16}>
+        {content}
+      </Grid>
     );
   }
 }
+const mapStateToProps = state => ({
+  profile:  state.profile,
+})
 
-export default SimpleMenu;
+export default connect(mapStateToProps, {getProfileByUsername})(SimpleMenu);

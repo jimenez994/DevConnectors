@@ -4,6 +4,7 @@ const profileValidator = require("./../validation/profile");
 const isEmpty = require("./../validation/is-empty");
 
 module.exports = {
+  // Get profile by _id
   findProfile: (req, res) => {
     profile
       .findOne({ _user: req.user._id }).populate("_experience").populate("_education").exec()
@@ -16,6 +17,13 @@ module.exports = {
       })
       .catch(err => res.status(400).json(err));
   },
+  // GET profile by username
+  findProfileByUsername: (req, res) => {
+    profile.findOne({username: req.params.username}).populate("_user", ['firstName', 'lastName']).exec()
+    .then(result => res.status(200).json(result))
+    .catch(err=> res.status(400).json(err))
+  } ,
+  // Get al profiles
   allProfiles: (req, res) => {
     profile
       .find({})
@@ -29,13 +37,13 @@ module.exports = {
         return res.status(400).json({ profiles: "Not found" });
       });
   },
+  // create or update profile
   createOrUpdate: (req, res) => {
     const { errors, isValid } = profileValidator(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
     }
     req.body._user = req.user._id;
-    // console.log(req.user._id, req.body);
     profile.findOne({ _user: req.user._id }).then(result => {
       let str = req.body.skills + "";
       let skills = str.split(",");
@@ -53,7 +61,6 @@ module.exports = {
               }
             });
         }
-        // console.log(req.body._id, req.body);
         profile
           .findOneAndUpdate({ _id: req.body._id }, req.body)
           .then(updatedProfile => {
