@@ -22,7 +22,7 @@ class SimpleMenu extends React.Component {
 
     }
     return (
-      <Grid container justify="center" spacing={16}>
+      <Grid container justify="center" style={{margin:"15px"}} spacing={16}>
         {content}
       </Grid>
     );
