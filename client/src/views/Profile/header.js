@@ -1,6 +1,13 @@
-import { Grid, Avatar, CardContent, Typography, Card } from "@material-ui/core";
+import {
+  Grid,
+  Avatar,
+  CardContent,
+  Typography,
+  Card,
+  CardMedia
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import styles from "assets/jss/views/dashboardStyle";
+import styles from "assets/jss/views/profileStyle";
 import React, { Component } from "react";
 
 class Header extends Component {
@@ -10,16 +17,27 @@ class Header extends Component {
 
     return (
       <React.Fragment>
-        <Grid className={classes.avatarGrid} item lg={2} md={2} sm={12} xs={12}>
-          <Avatar
-            className={classes.avatar}
-            alt="lba"
-            src={`https://api.adorable.io/avatars/200/${profile.username}.png`}
-          />
-        </Grid>
         <Grid item lg={8} md={8} sm={12} xs={12}>
           <Card>
+            <CardMedia
+              className={classes.cardMediaHeader}
+              image={require("./../../assets/img/nightSky.jpg")}
+              title={profile._user.firstName + " " + profile._user.lastName}
+            />
             <CardContent>
+              <Grid
+                className={classes.avatarContainerHeader}
+                container
+                justify="center"
+              >
+                <Avatar
+                  className={classes.avatarHeader}
+                  alt="Remy Sharp"
+                  src={`https://api.adorable.io/avatars/200/${
+                    profile.username
+                  }.png`}
+                />{" "}
+              </Grid>
               <Typography variant="headline">
                 {profile._user.firstName + " " + profile._user.lastName}
               </Typography>
