@@ -21,9 +21,7 @@ class SimpleMenu extends React.Component {
     let content;
     if (isEmpty(profile) || loading) {
       content = <Loading />;
-    } else {
-      console.log(profile);
-      
+    } else {      
       content = (
         <React.Fragment>
           <Header profile={profile} />
