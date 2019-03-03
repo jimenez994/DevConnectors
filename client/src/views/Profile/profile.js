@@ -1,35 +1,55 @@
 import { Grid } from "@material-ui/core";
-import { getProfileByUsername } from 'actions/profileActions';
+import { getProfileByUsername } from "actions/profileActions";
 import React from "react";
 import { connect } from "react-redux";
 import Header from "./header";
+import Skills from "./skills";
+import Education from "./education";
+import Experiecne from "./experience";
 import isEmpty from "../../validation/is-empty";
-import Loading from 'views/common/Loading';
+import Loading from "views/common/Loading";
 
 class SimpleMenu extends React.Component {
   componentDidMount() {
     if (this.props.match.params.username) {
       this.props.getProfileByUsername(this.props.match.params.username);
     }
-  };
+  }
   render() {
-    const {profile, loading} = this.props.profile;
+    const { profile, loading } = this.props.profile;
     let content;
-    if(isEmpty(profile) || loading){
-      content= <Loading/>
-    }else{
-      content= <Header profile={profile} />
-
+    if (isEmpty(profile) || loading) {
+      content = <Loading />;
+    } else {
+      console.log(profile);
+      
+      content = (
+        <React.Fragment>
+          <Header profile={profile} />
+          <Skills skills={profile.skills}/>
+          <Education educationArray={profile._education} />
+          <Experiecne experienceArrray={profile._experience}/>
+        </React.Fragment>
+      );
     }
     return (
-      <Grid container justify="center" style={{marginTop:"15px", marginBottom:"15px"}} spacing={16}>
+      <Grid
+      // direction="column"
+        container
+        justify="center"
+        style={{ marginTop: "15px", marginBottom: "15px" }}
+        spacing={16}
+      >
         {content}
       </Grid>
     );
   }
 }
 const mapStateToProps = state => ({
-  profile:  state.profile,
-})
+  profile: state.profile
+});
 
-export default connect(mapStateToProps, {getProfileByUsername})(SimpleMenu);
+export default connect(
+  mapStateToProps,
+  { getProfileByUsername }
+)(SimpleMenu);

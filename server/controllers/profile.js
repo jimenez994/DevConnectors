@@ -19,7 +19,7 @@ module.exports = {
   },
   // GET profile by username
   findProfileByUsername: (req, res) => {
-    profile.findOne({username: req.params.username}).populate("_user", ['firstName', 'lastName']).exec()
+    profile.findOne({username: req.params.username}).populate("_experience").populate("_education").populate("_user", ['firstName', 'lastName']).exec()
     .then(result => res.status(200).json(result))
     .catch(err=> res.status(400).json(err))
   } ,

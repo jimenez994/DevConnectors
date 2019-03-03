@@ -45,6 +45,9 @@ class Header extends Component {
                 {profile.professionalStatus}
               </Typography>
               <Typography variant="subtitle1">{profile.location}</Typography>
+              <Typography variant="body1">
+                {profile.bio}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>

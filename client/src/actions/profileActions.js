@@ -37,6 +37,8 @@ export const getProfileByUsername = username => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
+      console.log(res.data);
+      
       dispatch({
         type: GET_PROFILE,
         payload: res.data
