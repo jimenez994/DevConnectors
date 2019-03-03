@@ -6,6 +6,7 @@ import Header from "./header";
 import Skills from "./skills";
 import Education from "./education";
 import Experiecne from "./experience";
+import ProfileGihub from './github';
 import isEmpty from "../../validation/is-empty";
 import Loading from "views/common/Loading";
 
@@ -27,8 +28,9 @@ class SimpleMenu extends React.Component {
         <React.Fragment>
           <Header profile={profile} />
           <Skills skills={profile.skills}/>
+          <Experiecne experienceArray={profile._experience}/>
           <Education educationArray={profile._education} />
-          <Experiecne experienceArrray={profile._experience}/>
+          <ProfileGihub username={profile.username}/>
         </React.Fragment>
       );
     }
