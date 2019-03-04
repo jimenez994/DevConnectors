@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, CardContent, Typography, Card } from "@material-ui/core";
+import { Grid, CardContent, Typography, Card, Link, Badge } from "@material-ui/core";
 import isEmpty from "./../../validation/is-empty";
 
 class ProfileGithub extends Component {
@@ -40,17 +40,17 @@ class ProfileGithub extends Component {
           <CardContent>
             <Grid container direction="row">
               <Grid item lg={8} md={8} sm={12} xs={12}>
-                <Typography variant="subtitle2">{repo.name}</Typography>
+                <Link href={repo.html_url} target="_blank" variant="subtitle2">{repo.name}</Link>
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
-                <Typography>
-                  <span>Stars: {repo.forks_count}</span>
-                  <span> Watchers: {repo.forks_count}</span>
-                  <span> Forks: {repo.forks_count}</span>
+                <Typography variant="caption">
+                <span style={{backgroundColor:"#28B3F3", padding:"2px 5px 2px 5px", borderRadius:"5px", color:"white" }}>{" Starts: "+repo.forks_count}</span>
+                <span style={{backgroundColor:"#6C757D", margin:"0px 5px 0px 5px", padding:"2px 5px 2px 5px", borderRadius:"5px", color:"white" }}>{" Watchers: "+repo.forks_count}</span>
+                <span style={{backgroundColor:"#2BA745", padding:"2px 5px 2px 5px", borderRadius:"5px", color:"white" }}>{" Forks: "+repo.forks_count}</span>
                 </Typography>
               </Grid>
             </Grid>
-            <Typography variant="body2">{repo.description}</Typography>
+            <Typography variant="body1">{repo.description}</Typography>
           </CardContent>
         </Card>
       ));

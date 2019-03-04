@@ -7,7 +7,7 @@ const PostSchema = new mongoose.Schema({
   },
   text: {
     type: String,
-    minlength: [8, "Must be at least 8 characters"]
+    required: true
   },
   firstName: {
     type: String,
@@ -34,7 +34,7 @@ const PostSchema = new mongoose.Schema({
     },
     text: {
       type: String,
-      minlength: [8, "Must be at least 8 characters"]
+      required:true
     },
     firstName: {
       type: String,
