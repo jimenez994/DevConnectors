@@ -22,7 +22,6 @@ class ProfileGithub extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        // console.log(this.refs.myRef);
         // if (this.refs.myRef) {
         this.setState({ repos: data });
         // }
@@ -30,9 +29,9 @@ class ProfileGithub extends Component {
       .catch(err => console.log(err));
   };
   render() {
-    console.log(this.state.repos);
+
     let content;
-    if (isEmpty(this.state.repos)) {
+    if (this.state.repos.constructor !== Array) {
       content = <Typography>No repos</Typography>;
     } else {
       content = this.state.repos.map(repo => (

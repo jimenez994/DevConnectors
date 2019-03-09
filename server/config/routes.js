@@ -29,6 +29,6 @@ module.exports = app => {
   app.delete("/api/deleteExperience/:id", private, experience.deleteOne);
 
   // Post
-  app.get("/api/getAll", private, post.allPosts);
+  app.get("/api/getPosts", private, post.allPosts);
   app.post("/api/createPost", private, post.createPost);
 };

@@ -51,9 +51,18 @@ class Navbar extends Component {
             color="inherit"
             underline="none"
             component={RouterLink}
+            to="/feed"
+          >
+            Post Feed 
+          </Link>
+
+          <Link
+            color="inherit"
+            underline="none"
+            component={RouterLink}
             to="/dashboard"
           >
-            {user.firstName}
+            {" "+user.firstName}
           </Link>
           <Button color="inherit" onClick={this.onLogoutClick}>
             Logout
