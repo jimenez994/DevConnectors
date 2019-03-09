@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/views/profileStyle";
-import isEmpty from '../../validation/is-empty'
+import isEmpty from "../../validation/is-empty";
 import React, { Component } from "react";
 
 class Header extends Component {
@@ -34,9 +34,7 @@ class Header extends Component {
                 <Avatar
                   className={classes.avatarHeader}
                   alt="Remy Sharp"
-                  src={`https://api.adorable.io/avatars/200/${
-                    profile.username
-                  }.png`}
+                  src={profile._user.avatar}
                 />{" "}
               </Grid>
               <Typography variant="headline">
@@ -46,9 +44,7 @@ class Header extends Component {
                 {profile.professionalStatus}
               </Typography>
               <Typography variant="subtitle1">{profile.location}</Typography>
-              <Typography variant="body1">
-                {profile.bio}
-              </Typography>
+              <Typography variant="body1">{profile.bio}</Typography>
             </CardContent>
           </Card>
         </Grid>

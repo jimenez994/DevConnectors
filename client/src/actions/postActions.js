@@ -18,6 +18,14 @@ export const getPosts = () => dispatch => {
     })
 }
 
+export const createPost = (postInputs) => dispatch => {
+  axios.post('api/createPost', postInputs)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err.response.data))
+}
+
 export const setLoading = () => {
   return {
     type: POST_LOADING

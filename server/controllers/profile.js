@@ -7,7 +7,10 @@ module.exports = {
   // Get profile by _id
   findProfile: (req, res) => {
     profile
-      .findOne({ _user: req.user._id }).populate("_experience").populate("_education").exec()
+      .findOne({ _user: req.user._id })
+      .populate("_experience")
+      .populate("_education")
+      .exec()
       .then(profile => {
         if (isEmpty(profile)) {
           res.status(400).json({ profile: false });
@@ -19,16 +22,21 @@ module.exports = {
   },
   // GET profile by username
   findProfileByUsername: (req, res) => {
-    profile.findOne({username: req.params.username}).populate("_experience").populate("_education").populate("_user", ['firstName', 'lastName']).exec()
-    .then(result => res.status(200).json(result))
-    .catch(err=> res.status(400).json(err))
-  } ,
+    profile
+      .findOne({ username: req.params.username })
+      .populate("_experience")
+      .populate("_education")
+      .populate("_user", ["firstName", "lastName", "avatar", "email"])
+      .exec()
+      .then(result => res.status(200).json(result))
+      .catch(err => res.status(400).json(err));
+  },
   // Get al profiles
   allProfiles: (req, res) => {
     profile
       .find({})
       .select("username skills location professionalStatus")
-      .populate("_user", "firstName lastName avatar")
+      .populate("_user", "firstName lastName avatar email")
       .exec()
       .then(profiles => {
         return res.status(200).json(profiles);
@@ -70,7 +78,7 @@ module.exports = {
             return res.status(404).json(err);
           });
       } else {
-        // before createing profile check if username is taken 
+        // before createing profile check if username is taken
         profile.findOne({ username: req.body.username }).then(otherProfile => {
           if (otherProfile) {
             return res

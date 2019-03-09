@@ -40,10 +40,11 @@ class ProfileCard extends Component {
         <Card className={classes.card}>
           <CardMedia
             className={classes.img}
-            image={`https://api.adorable.io/avatars/200/${user.username}.png`}
+            image={user._user.avatar}
             title="Live from space album cover"
           />
           <CardContent className={classes.cardContent}>
+          {/* {user._user.email} */}
             <Typography variant="title">
               {user._user.firstName} {user._user.lastName}
             </Typography>

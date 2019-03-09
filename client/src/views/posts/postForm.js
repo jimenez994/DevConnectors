@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from 'validation/is-empty';
+import {connect} from "react-redux";
 import {
   Grid,
   Card,
@@ -9,7 +10,7 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
-
+import {createPost} from 'actions/postActions';
 class PostForm extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,8 @@ class PostForm extends Component {
   }
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state.postInputs);
+    this.props.createPost(this.state.postInputs);
+    // console.log(this.state.postInputs);
   };
 
   onChange = e => {
@@ -60,6 +62,12 @@ class PostForm extends Component {
   }
 }
 
-PostForm.propTypes = {};
+PostForm.propTypes = {
+  createPost: PropTypes.func.isRequired,
+};
 
-export default PostForm;
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps, {createPost})(PostForm);

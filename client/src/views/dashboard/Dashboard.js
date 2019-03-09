@@ -97,9 +97,7 @@ class Dashboard extends Component {
                 <Avatar
                   className={classes.avatar}
                   alt="lba"
-                  src={`https://api.adorable.io/avatars/200/${
-                    profile.username
-                  }.png`}
+                  src={user.avatar}
                 />
               </Grid>
               <Grid item lg={8} md={8} sm={12} xs={12}>
