@@ -21,6 +21,7 @@ class PostForm extends Component {
       errors: {}
     };
   }
+
   onSubmit = e => {
     e.preventDefault();
     this.props.createPost(this.state.postInputs);
@@ -37,6 +38,7 @@ class PostForm extends Component {
       }
     }));
   };
+  
   render() {
     return (
       <Grid item sm={10} style={{ marginTop: "10px" }}>
