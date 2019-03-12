@@ -25,8 +25,20 @@ class PostForm extends Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.createPost(this.state.postInputs);
-    // console.log(this.state.postInputs);
+    this.setState(prevState => ({
+      ...prevState,
+      postInputs: {
+        ...prevState.postInputs,
+        text: ""
+      }
+    }));
   };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   onChange = e => {
     e.persist();
@@ -38,7 +50,7 @@ class PostForm extends Component {
       }
     }));
   };
-  
+
   render() {
     return (
       <Grid item sm={10} style={{ marginTop: "10px" }}>
@@ -69,7 +81,7 @@ PostForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-
+  errors: state.errors
 })
 
 export default connect(mapStateToProps, {createPost})(PostForm);

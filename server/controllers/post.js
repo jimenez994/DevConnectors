@@ -11,7 +11,7 @@ module.exports = {
       .find()
       .then(result => {
         if (!isEmpty(result)) {
-          return res.status(200).json(result);
+          return res.status(200).json(result.reverse());
         } else {
           return res.status(400).json({ posts: false });
         }
