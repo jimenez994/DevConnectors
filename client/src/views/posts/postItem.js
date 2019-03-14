@@ -16,6 +16,8 @@ import { Favorite, Share, ExpandMore, MoreVert } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Moment from "react-moment";
+import { connect } from "react-redux";
+import { deletePost } from "actions/postActions";
 
 const styles = theme => ({
   expand: {
@@ -36,47 +38,53 @@ class PostItem extends Component {
   handleExpandClick = () => {
     this.setState(state => ({ commentExpanded: !state.commentExpanded }));
   };
-  handleMenuExpand = event => {    
-    this.setState({ menuExpanded: event.currentTarget })
-  }
+  handleMenuExpand = event => {
+    this.setState({ menuExpanded: event.currentTarget });
+  };
   deletePostItem = id => () => {
-    this.setState({menuExpanded:null})
-  }
-  handleCloseMenu =() => {
+    this.props.deletePost(id);
     this.setState({ menuExpanded: null });
-  }
+  };
+  handleCloseMenu = () => {
+    this.setState({ menuExpanded: null });
+  };
 
   render() {
     const { classes } = this.props;
     const { post } = this.props;
     const { menuExpanded } = this.state;
+    const { user } = this.props.auth;
+    let sectionDeleteContent;
+    if (user._id === post._user) {
+      sectionDeleteContent = (
+        <React.Fragment>
+          <IconButton
+            aria-owns={menuExpanded ? `${post._id}` : undefined}
+            aria-haspopup="true"
+            onClick={this.handleMenuExpand}
+          >
+            <MoreVert />
+          </IconButton>
+          <Menu
+            id={post._id}
+            anchorEl={menuExpanded}
+            open={Boolean(menuExpanded)}
+            onClose={this.handleCloseMenu}
+          >
+            <MenuItem onClick={this.deletePostItem(post._id)}>Delete</MenuItem>
+          </Menu>
+        </React.Fragment>
+      );
+    }
     return (
       <Card style={{ marginTop: "10px" }}>
         <CardHeader
           avatar={<Avatar src={post.avatar} />}
-          action={
-            <React.Fragment>
-              <IconButton
-                aria-owns={menuExpanded ? `${post._id}` : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenuExpand}
-              >
-                <MoreVert />
-              </IconButton>
-              <Menu
-                id={post._id}
-                anchorEl={menuExpanded}
-                open={Boolean(menuExpanded)}
-                onClose={this.handleCloseMenu}
-              >
-                <MenuItem onClick={this.deletePostItem(post._id)}>Delete</MenuItem>
-              </Menu>
-            </React.Fragment>
-          }
+          action={sectionDeleteContent}
           title={post.firstName + " " + post.lastName}
           subheader={<Moment format="MMM DD YYYY">{post.createdAt}</Moment>}
         />
-        <CardContent style={{ marginTop: "-23px", marginBottom:"-20px" }}>
+        <CardContent style={{ marginTop: "-23px", marginBottom: "-20px" }}>
           <Typography>{post.text}</Typography>
         </CardContent>
         <CardActions disableActionSpacing>
@@ -135,7 +143,14 @@ class PostItem extends Component {
 }
 
 PostItem.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  deletePost: PropTypes.func.isRequired
 };
-
-export default withStyles(styles)(PostItem);
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+export default connect(
+  mapStateToProps,
+  { deletePost }
+)(withStyles(styles)(PostItem));

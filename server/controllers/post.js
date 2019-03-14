@@ -35,6 +35,7 @@ module.exports = {
         req.body.firstName = req.user.firstName;
         req.body.lastName = req.user.lastName;
         req.body.avatar = req.user.avatar;
+        req.body._user = req.user._id
         post
           .create(req.body)
           .then(result => {
@@ -49,6 +50,11 @@ module.exports = {
           });
       }
     });
-  }
+  },
   // Delete post
+  deletePost: (req, res) =>{
+    post.deleteOne({_id: req.params.id})
+      .then(result => res.status(200).json(result._id))
+      .catch(err => res.status(400).json({postDelete: false}))
+  }
 };

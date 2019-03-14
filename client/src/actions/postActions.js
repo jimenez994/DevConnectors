@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_POSTS, POST_LOADING, GET_ERRORS, ADD_POST, CLEAR_ERRORS } from './Types';
+import { GET_POSTS, POST_LOADING, GET_ERRORS, ADD_POST, CLEAR_ERRORS, DELETE_POST } from './Types';
 
 export const getPosts = () => dispatch => {
   dispatch(clearErrors());
@@ -33,6 +33,19 @@ export const createPost = (postInputs) => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
+    })
+}
+
+export const deletePost = (postId) => dispatch => {
+  axios.delete(`api/deletePost/${postId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_POST,
+        payload: postId
+      })
+    })
+    .catch(err => {
+      console.log(err);
     })
 }
 

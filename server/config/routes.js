@@ -31,4 +31,5 @@ module.exports = app => {
   // Post
   app.get("/api/getPosts", private, post.allPosts);
   app.post("/api/createPost", private, post.createPost);
+  app.delete("/api/deletePost/:id", private, post.deletePost);
 };
