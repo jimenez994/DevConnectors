@@ -8,7 +8,7 @@ import {
   Typography,
   CardContent
 } from "@material-ui/core";
-import { Work, School } from "@material-ui/icons";
+import { School } from "@material-ui/icons";
 import Moment from "react-moment";
 
 class Education extends Component {

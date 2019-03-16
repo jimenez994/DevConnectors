@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { GET_POSTS, POST_LOADING, GET_ERRORS, ADD_POST, CLEAR_ERRORS, DELETE_POST } from './Types';
+import { GET_POSTS, POST_LOADING, GET_ERRORS, ADD_POST, CLEAR_ERRORS, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from './Types';
 
+// get all posts
 export const getPosts = () => dispatch => {
   dispatch(clearErrors());
   dispatch(setLoading());
@@ -19,6 +20,7 @@ export const getPosts = () => dispatch => {
     })
 }
 
+// create a new post
 export const createPost = (postInputs) => dispatch => {
   dispatch(clearErrors());
   axios.post('api/createPost', postInputs)
@@ -36,6 +38,7 @@ export const createPost = (postInputs) => dispatch => {
     })
 }
 
+// Delete a post by id
 export const deletePost = (postId) => dispatch => {
   axios.delete(`api/deletePost/${postId}`)
     .then(res => {
@@ -49,6 +52,33 @@ export const deletePost = (postId) => dispatch => {
     })
 }
 
+// Add comment 
+export const createComment = (postId, userInputs) => dispatch => {
+  console.log(postId +"  " + userInputs);
+  
+  axios.post( `api/addComment/${postId}`, userInputs)
+    .then(res => {
+      res.data._post = postId
+      dispatch({
+        type: ADD_COMMENT,
+        payload: res.data
+      })
+    })
+}
+
+// Delete comment 
+export const deleteComment = (postId, commentId) => dispatch => {
+  axios.delete(`api/deleteComment/${postId}/${commentId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err.response);
+    })
+}
 export const setLoading = () => {
   return {
     type: POST_LOADING

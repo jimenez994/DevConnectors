@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/views/profileStyle";
-import isEmpty from "../../validation/is-empty";
 import React, { Component } from "react";
 
 class Header extends Component {

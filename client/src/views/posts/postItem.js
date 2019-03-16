@@ -18,6 +18,7 @@ import classnames from "classnames";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { deletePost } from "actions/postActions";
+import CommentForm from './../post/commentForm';
 
 const styles = theme => ({
   expand: {
@@ -107,6 +108,7 @@ class PostItem extends Component {
         </CardActions>
         <Collapse in={this.state.commentExpanded} timeout="auto" unmountOnExit>
           <CardContent>
+            <CommentForm postId={post._id}/>
             <Typography paragraph>Method:</Typography>
             <Typography paragraph>
               Heat 1/2 cup of the broth in a pot until simmering, add saffron

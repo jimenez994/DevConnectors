@@ -20,6 +20,10 @@ export const GET_POST = 'GET_POST';
 export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
 
+// Comment 
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
 // Education Types
 export const ADD_EDUCATION = 'ADD_EDUCATION';
 export const DELETE_EDUCATION = 'DELETE_EDUCATION';

@@ -44,7 +44,7 @@ const PostSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    username: {
+    avatar: {
       type: String,
       required: true
     }

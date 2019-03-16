@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, CardContent, Typography, Card, Link, Badge } from "@material-ui/core";
-import isEmpty from "./../../validation/is-empty";
+import { Grid, CardContent, Typography, Card, Link } from "@material-ui/core";
+// import isEmpty from "./../../validation/is-empty";
 
 class ProfileGithub extends Component {
   constructor(props) {
