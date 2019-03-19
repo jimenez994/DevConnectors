@@ -47,6 +47,10 @@ const PostSchema = new mongoose.Schema({
     avatar: {
       type: String,
       required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
     }
   }]
 }, {timestamps: true});

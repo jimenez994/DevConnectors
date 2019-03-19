@@ -1,15 +1,8 @@
+import { Button, Grid, TextField } from "@material-ui/core";
+import { createComment } from 'actions/postActions';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import PropTypes, { object, string } from 'prop-types';
-import {connect} from 'react-redux';
-import isEmpty from 'validation/is-empty';
-import {createComment} from 'actions/postActions';
-import {
-  Grid,
-  Card,
-  CardContent,
-  Button,
-  TextField
-} from "@material-ui/core";
+import { connect } from 'react-redux';
 class CommentForm extends Component {
   constructor(props) {
     super(props);
@@ -32,12 +25,6 @@ class CommentForm extends Component {
   onSubmit = e => {
     e.preventDefault();
     const {postId} = this.props
-    console.log(this.props);
-    
-    console.log(postId );
-    console.log(this.state.commentInputs);
-    
-    
     this.props.createComment(postId, this.state.commentInputs);
     this.setState(prevState => ({
       ...prevState,

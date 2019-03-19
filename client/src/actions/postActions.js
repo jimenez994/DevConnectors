@@ -53,16 +53,20 @@ export const deletePost = (postId) => dispatch => {
 }
 
 // Add comment 
-export const createComment = (postId, userInputs) => dispatch => {
-  console.log(postId +"  " + userInputs);
-  
+export const createComment = (postId, userInputs) => dispatch => {  
   axios.post( `api/addComment/${postId}`, userInputs)
     .then(res => {
       res.data._post = postId
-      dispatch({
-        type: ADD_COMMENT,
-        payload: res.data
-      })
+      console.log(res.data);
+      
+      // dispatch({
+      //   type: ADD_COMMENT,
+      //   payload: res.data
+      // })
+    })
+    .catch(err => {
+      console.log(err.response.data);
+      
     })
 }
 

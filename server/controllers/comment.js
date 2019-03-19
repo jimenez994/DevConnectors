@@ -6,30 +6,26 @@ const isEmpty = require("./../validation/is-empty");
 const commentValidator = require("./../validation/comment");
 module.exports = {
   createComment: (req, res) => {
-    const { errors, isValid } = commentValidator;
+    const { errors, isValid } = commentValidator(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
     }
     post
-      .find({ _id: req.params.id })
+      .findById({ _id: req.params.id })
       .then(result => {
-        if (isEmpty(result)) {
-          return res.status(400).json({ text: "Post not found" });
-        } else {
-          newComment = {
+          const newComment = {
             text: req.body.text,
             firstName: req.user.firstName,
             lastName: req.user.lastName,
             avatar: req.user.avatar,
             _user: req.user._id
           };
-          result._comments.unshift(newComment);
+          result.comments.unshift(newComment);
           result.save();
           return res.status(200).json(newComment);
-        }
       })
       .catch(err => {
-        console.log(err);
+        return res.status(400).json({ text: "Post not found" });
       });
   },
   deleteOne: (req, res) => {

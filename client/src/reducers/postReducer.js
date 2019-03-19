@@ -1,4 +1,4 @@
-import { GET_POSTS, POST_LOADING, ADD_POST, DELETE_POST } from "../actions/Types";
+import { GET_POSTS, POST_LOADING, ADD_POST, DELETE_POST, ADD_COMMENT } from "../actions/Types";
 
 const initialState = {
   loading: false,
@@ -23,6 +23,11 @@ export default function (state = initialState, action) {
         ...state,
         posts: [action.payload,...state.posts]
       }
+    // case ADD_COMMENT:
+    //   return {
+    //     // ...state,
+    //     // posts: state.posts.find(post => post._id === action.payload._post)
+    //   }
     case DELETE_POST:
       return {
         ...state,
