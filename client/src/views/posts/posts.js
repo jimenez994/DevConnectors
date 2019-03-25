@@ -16,7 +16,7 @@ class Posts extends Component {
     let contentFeed;
     if (!isEmpty(posts)) {
       contentFeed = (
-        <Grid item sm={10}>
+        <Grid item sm={12} xs={12} md={10} lg={10} xl={10}>
           <PostFeed posts={posts} />
         </Grid>
       );

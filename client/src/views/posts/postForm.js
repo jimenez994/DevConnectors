@@ -52,7 +52,7 @@ class PostForm extends Component {
 
   render() {
     return (
-      <Grid item sm={10} style={{ marginTop: "10px" }}>
+      <Grid item sm={12} xs={12} md={10} lg={10} xl={10} style={{ marginTop: "10px" }}>
         <Card>
           <CardContent>
             <form onSubmit={this.onSubmit}>
