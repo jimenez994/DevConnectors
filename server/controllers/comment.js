@@ -21,8 +21,7 @@ module.exports = {
             _user: req.user._id
           };
           result.comments.unshift(newComment);
-          result.save();
-          return res.status(200).json(newComment);
+          result.save().then(post => res.status(200).json(post))
       })
       .catch(err => {
         return res.status(400).json({ text: "Post not found" });

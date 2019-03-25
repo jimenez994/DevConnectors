@@ -37,4 +37,8 @@ module.exports = app => {
   // Comment
   app.post("/api/addComment/:id", private, comment.createComment);
   app.delete("/api/deleteComment/:postId/:commentId", private, comment.deleteOne);
+
+  app.all("*", (req, res,next) => {
+    res.sendFile(path.resolve("./client/build/index.html"));
+})
 };
