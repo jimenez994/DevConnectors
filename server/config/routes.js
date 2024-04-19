@@ -46,8 +46,8 @@ module.exports = app => {
   //   const index = path.join(__dirname, '/', '../build', 'index.html' );
   //   res.sendFile(index);
   // });
-//   app.all("*", (req, res,next) => {
-//     res.sendFile(path.resolve("./client/build/index.html"));
+  // app.all("*", (req, res,next) => {
+  //   res.sendFile(path.resolve("./client/build/index.html"));
   // })
   
 };
