@@ -5,6 +5,7 @@ const education = require("../controllers/education");
 const experience = require("../controllers/experience");
 const post = require("../controllers/post");
 const comment = require("../controllers/comment");
+const path = require("path")
 
 module.exports = app => {
   // with auth routes can be assigned to become private
@@ -38,7 +39,15 @@ module.exports = app => {
   app.post("/api/addComment/:id", private, comment.createComment);
   app.delete("/api/deleteComment/:postId/:commentId", private, comment.deleteOne);
 
-  app.all("*", (req, res,next) => {
-    res.sendFile(path.resolve("./client/build/index.html"));
-})
+  // app.get('/*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+  // });
+  // app.get('*', (req, res)=> {
+  //   const index = path.join(__dirname, '/', '../build', 'index.html' );
+  //   res.sendFile(index);
+  // });
+//   app.all("*", (req, res,next) => {
+//     res.sendFile(path.resolve("./client/build/index.html"));
+  // })
+  
 };
