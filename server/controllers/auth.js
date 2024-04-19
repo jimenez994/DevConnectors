@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
+const key = process.env.SECRET_KEY 
 const validateRegistrationInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
@@ -34,7 +34,7 @@ module.exports = {
               // generating a token with the payload, type "Bearer", and expiration time "1h"
               jwt.sign(
                 payload,
-                keys.secretKey,
+                key,
                 { expiresIn: "1h" },
                 (err, token) => {
                   return res.json({ success: true, token: "Bearer " + token });
@@ -67,7 +67,7 @@ module.exports = {
               // generating a token with the payload, type "Bearer", and expiration time "1h"
               jwt.sign(
                 payload,
-                keys.secretKey,
+                key,
                 { expiresIn: "1h" },
                 (err, token) => {
                   res.json({ success: true, token: "Bearer " + token });
