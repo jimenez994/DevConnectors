@@ -26,7 +26,7 @@ module.exports = {
       .findOne({ username: req.params.username })
       .populate("_experience")
       .populate("_education")
-      .populate("_user", ["firstName", "lastName", "avatar", "email"])
+      .populate("_user", ["name", "avatar", "email"])
       .exec()
       .then(result => res.status(200).json(result))
       .catch(err => res.status(400).json(err));

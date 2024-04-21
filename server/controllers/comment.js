@@ -15,8 +15,7 @@ module.exports = {
       .then(result => {
           const newComment = {
             text: req.body.text,
-            firstName: req.user.firstName,
-            lastName: req.user.lastName,
+            name: req.user.name,
             avatar: req.user.avatar,
             _user: req.user._id
           };

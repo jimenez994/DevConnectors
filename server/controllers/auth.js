@@ -27,8 +27,7 @@ module.exports = {
               const payload = {
                 _id: user._id,
                 email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                name: user.name,
                 avatar: user.avatar
               };
               // generating a token with the payload, type "Bearer", and expiration time "1h"
@@ -60,8 +59,7 @@ module.exports = {
               const payload = {
                 _id: user._id,
                 email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                name: user.name,
                 avatar: user.avatar
               };
               // generating a token with the payload, type "Bearer", and expiration time "1h"

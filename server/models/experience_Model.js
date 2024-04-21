@@ -28,4 +28,4 @@ const ExperienceSchema = new mongoose.Schema({
   }
 }, {timestamps: true})
 
-const Experience = mongoose.model("Experience", ExperienceSchema)
+module.exports = mongoose.model("Experience", ExperienceSchema)

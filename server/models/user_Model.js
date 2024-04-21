@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   email:{
     type: String,
-    required: [true, "First name is required"],
+    required: [true, "Email is required"],
     validate: {
       // email validator
       validator: function(value) {
@@ -14,13 +14,9 @@ const UserSchema = new mongoose.Schema({
       message: "Invalid E-mail format"
     }
   },
-  firstName:{
+  name:{
     type: String,
-    required: [true, "First name is required"]
-  },
-  lastName:{
-    type: String,
-    required: [true, "Last name is required"]
+    required: [true, "Name is required"]
   },
   password:{
     type: String,
@@ -32,4 +28,4 @@ const UserSchema = new mongoose.Schema({
   }
 }, {timestamps: true})
 
-const User = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

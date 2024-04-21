@@ -32,8 +32,7 @@ module.exports = {
           .status(400)
           .json({ text: "It looks like you are not logged in" });
       } else {
-        req.body.firstName = req.user.firstName;
-        req.body.lastName = req.user.lastName;
+        req.body.name = req.user.name;
         req.body.avatar = req.user.avatar;
         req.body._user = req.user._id
         post
