@@ -1,37 +1,33 @@
-require('dotenv').config()
 const express = require('express');
-const bodyParser = require('body-parser');
-const port = process.env.PORT || 5002; 
-const app = express();
+const connectDB = require('./server/config/db');
 const path = require('path');
-const passport = require('passport')
-const cors = require('cors');
-const connectDB = require('./server/config/db')
+require('dotenv').config()
 
-app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-app.use(express.json());
 
+const app = express();
+
+// Connect Database
 connectDB();
 
-app.use(cors())
+// Init Middleware
+app.use(express.json());
 
+// Define Routes
+app.use('/api/users', require('./server/routes/api/users'));
+app.use('/api/auth', require('./server/routes/api/auth'));
+app.use('/api/profile', require('./server/routes/api/profile'));
+app.use('/api/posts', require('./server/routes/api/posts'));
+
+// Serve static assets in production
+// if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+// }
 
-// passport middleware
-// ---------->>> the order matters!!! <<<-------------
-// passport middleware
-app.use(passport.initialize())
-// passport config
-require("./server/config/passport")(passport)
-require("./server/config/routes")(app);
+const PORT = process.env.PORT || 5005;
 
-
-app.listen(port, () => {
-  console.log(`Hey! you are in port ${port}`);
-});
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

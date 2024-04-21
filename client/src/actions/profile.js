@@ -44,6 +44,7 @@ export const getProfiles = () => async (dispatch) => {
     const res = await api.get('/profile');
 
     dispatch({
+      
       type: GET_PROFILES,
       payload: res.data
     });

@@ -37,5 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://devconnectors-0xiy.onrender.com"
+  "proxy": "http://localhost:5005"
 }
